@@ -23,10 +23,14 @@ const RecipeSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    image: {
+      type: Buffer,
+      default: "",
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Users"
+      ref: "User"
     },
     instructions: [
       {

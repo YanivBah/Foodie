@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const uniqueValidator = require("mongoose-unique-validator");
+const Recipe = require("./recipe");
 
 const userSchema = new mongoose.Schema(
   {
@@ -34,11 +35,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    recipes: [{
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Recipe'
-    }],
+    // recipes: [{
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: 'Recipe'
+    // }],
     tokens: [{
       token: {
         type: String,
@@ -49,6 +50,12 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+userSchema.virtual('recipes', {
+  ref: 'Recipe',
+  localField: '_id',
+  foreignField: 'owner'
+});
+
 userSchema.plugin(uniqueValidator, { message: "is already taken." });
 
 userSchema.pre("save", async function (next) {
@@ -56,6 +63,12 @@ userSchema.pre("save", async function (next) {
   if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }
+  next();
+});
+
+userSchema.pre("delete", async function (next) {
+  const user = this;
+  Recipe.deleteMany({owner: user._id});
   next();
 });
 
