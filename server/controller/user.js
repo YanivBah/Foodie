@@ -32,4 +32,13 @@ const logoutUser = async (req,res) => {
   }
 }
 
-module.exports = { loginUser, signupUser, logoutUser };
+const deleteUser = async (req,res) => {
+  try {
+    await req.user.delete();
+    res.send({ message: "User deleted" });
+  } catch(e) {
+    res.status(400).send(e)
+  }
+}
+
+module.exports = { loginUser, signupUser, logoutUser, deleteUser };

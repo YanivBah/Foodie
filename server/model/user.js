@@ -66,9 +66,9 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.pre("delete", async function (next) {
+userSchema.pre("remove", async function (next) {
   const user = this;
-  Recipe.deleteMany({owner: user._id});
+  await Recipe.deleteMany({owner: user._id});
   next();
 });
 
