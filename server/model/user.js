@@ -1,8 +1,55 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const uniqueValidator = require("mongoose-unique-validator");
 
-const userSchema = new mongoose.Schema({});
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      // match: [/regex/, "invalid characters"],
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      uniqueCaseInsensitive: true,
+    },
+    password: {
+      type: String,
+      required: true
+    },
+    avatar: {
+      type: Buffer,
+      default: "",
+    },
+    score: {
+      type: Number,
+      default: 0,
+    },
+    isActive: {
+      type: Boolean,
+      default: false
+    },
+    recipes: [{
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Recipe'
+    }],
+    tokens: [{
+      token: {
+        type: String,
+        required: true
+      }
+    }]
+  },
+  { timestamps: true }
+);
+
+userSchema.plugin(uniqueValidator, { message: "is already taken." });
 
 userSchema.pre("save", async function (next) {
   const user = this;
