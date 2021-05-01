@@ -3,12 +3,24 @@ const User = require("../model/user");
 const loginUser = async (req,res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password);
+    if (!user.isActive) throw new Error('User not activated');
     const token = await user.generateAuthToken();
     res.send({user, token});
   } catch(e) {
     res.status(400).send(e.message);
   }
 };
+
+const activeUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.body.id);
+    user.isActive = true;
+    await user.save();
+    res.status(201).send({message: 'User activated'});
+  } catch(e) {
+    res.status(400).send(e.message)
+  }
+}
 
 const signupUser = async (req,res) => {
   try {
@@ -30,7 +42,7 @@ const logoutUser = async (req,res) => {
   } catch(e) {
     res.status(400).send(e)
   }
-}
+};
 
 const deleteUser = async (req,res) => {
   try {
@@ -39,6 +51,6 @@ const deleteUser = async (req,res) => {
   } catch(e) {
     res.status(400).send(e)
   }
-}
+};
 
-module.exports = { loginUser, signupUser, logoutUser, deleteUser };
+module.exports = { loginUser, signupUser, logoutUser, deleteUser, activeUser };

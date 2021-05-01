@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+const Comment = require("./comment");
 
 const RecipeSchema = new mongoose.Schema(
   {
@@ -83,6 +84,22 @@ const RecipeSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+RecipeSchema.pre("remove", async function (next) {
+  const recipe = this;
+  await Comment.findByIdAndDelete(recipe.comments.toString());
+  next();
+});
+
+RecipeSchema.pre("deleteMany", async function (next) {
+  const userID = this._conditions.owner;
+  const recipes = await Recipe.find({ owner: userID });
+  recipes.forEach(async recipe => {
+    const comment = await Comment.findById(recipe.comments.toString());
+    comment.remove();
+  });
+  next();
+});
 
 const Recipe = mongoose.model("Recipe", RecipeSchema);
 
