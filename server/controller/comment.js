@@ -26,8 +26,23 @@ const editComment = async (req, res) => {
     await req.comment.save();
     res.status(201).send(req.comment);
   } catch (e) {
-    res.status(400).send(e);
+    res.status(400).send(e.message);
   }
-}
+};
 
-module.exports = { addComment, editComment };
+const deleteComment = async (req, res) => {
+  try {
+    const commentIndex = await req.comment.comments.findIndex(comm => {
+      return req.body.id === comm._id.toString();
+    });
+    const isOwner = req.user._id.toString() === req.comment.comments[commentIndex].user.toString();
+    if (!isOwner) throw new Error('You are not the writer of the comment');
+    req.comment.comments.splice(commentIndex, 1);
+    await req.comment.save();
+    res.status(201).send({message: 'Comment deleted'});
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+};
+
+module.exports = { addComment, editComment, deleteComment };

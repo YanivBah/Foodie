@@ -25,7 +25,7 @@ const approveRecipe = async (req, res) => {
   } catch(e) {
     res.status(400).send(e);
   }
-}
+};
 
 const deleteRecipe = async (req, res) => {
   try {
