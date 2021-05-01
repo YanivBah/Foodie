@@ -43,6 +43,10 @@ const RecipeSchema = new mongoose.Schema(
       required: true,
       ref: "User"
     },
+    comments: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    },
     instructions: [
       {
         title: {
