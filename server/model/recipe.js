@@ -19,6 +19,17 @@ const RecipeSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    rating: [{
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User"
+      },
+      rating: {
+        type: Number,
+        required: true
+      }
+    }],
     isApproved: {
       type: Boolean,
       default: false,
