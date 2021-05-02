@@ -35,6 +35,20 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    permissions: {
+      ableToComment: {
+        type: Boolean,
+        default: true
+      },
+      ableToApprove: {
+        type: Boolean,
+        default: false
+      },
+      ableToBan: {
+        type: Boolean,
+        default: false
+      }
+    },
     tokens: [
       {
         token: {

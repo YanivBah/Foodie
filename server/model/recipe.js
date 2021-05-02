@@ -95,7 +95,7 @@ RecipeSchema.pre("deleteMany", async function (next) {
   const userID = this._conditions.owner;
   const recipes = await Recipe.find({ owner: userID });
   recipes.forEach(async recipe => {
-    const comment = await Comment.findById(recipe.comments.toString());
+    const comment = await Comment.findById(recipe.comments);
     comment.remove();
   });
   next();

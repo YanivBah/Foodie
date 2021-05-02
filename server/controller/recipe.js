@@ -1,5 +1,6 @@
 const Recipe = require("../model/recipe");
 const Comment = require("../model/comment");
+const User = require("../model/user");
 
 const addRecipe = async (req, res) => {
   try {
@@ -7,6 +8,12 @@ const addRecipe = async (req, res) => {
       ...req.body,
       owner: req.user._id
     });
+    if (req.user.score > 100 || req.user.permissions.ableToApprove) {
+      const comment = new Comment({ recipe: recipe._id });
+      recipe.comments = comment._id;
+      recipe.isApproved = true;
+      await comment.save();
+    }
     await recipe.save();
     res.status(201).send(recipe);
   } catch (e) {
@@ -43,9 +50,12 @@ const rateRecipe = async (req, res) => {
     const isNotOwner = req.user._id.toString() !== req.recipe.owner.toString();
     if (!isNotOwner) throw new Error('You cant rate your own recipe');
     if (req.body.rating > 5) throw new Error('You can rate from 1-5 only');
-    const isUserRated = await Recipe.find({"rating.user": req.user._id});
-    if (isUserRated.length !== 0) throw new Error('You rated already on this recipe');
+    const isUserRated = await Recipe.findOne({_id: req.recipe._id ,"rating.user": req.user._id});
+    if (isUserRated) throw new Error('You rated already on this recipe');
     req.recipe.rating.push({user: req.user._id, rating: req.body.rating});
+    const recipeOwner = await User.findById(req.recipe.owner);
+    recipeOwner.score += req.body.rating;
+    recipeOwner.save();
     await req.recipe.save();
     res.status(201).send({message: 'Rating added'});
   } catch(e) {
