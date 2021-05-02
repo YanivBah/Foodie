@@ -5,7 +5,7 @@ const loginUser = async (req,res) => {
     const user = await User.findByCredentials(req.body.email, req.body.password);
     if (!user.isActive) throw new Error('User not activated');
     const token = await user.generateAuthToken();
-    res.send({user, token});
+    res.send({ user: user.toPublicJSON(), token });
   } catch(e) {
     res.status(400).send(e.message);
   }
@@ -20,13 +20,13 @@ const activeUser = async (req, res) => {
   } catch(e) {
     res.status(400).send(e.message)
   }
-}
+};
 
 const signupUser = async (req,res) => {
   try {
     const user = new User(req.body);
     await user.save();
-    res.status(201).send(user);
+    res.status(201).send(user.toPublicJSON());
   } catch(e) {
     res.status(400).send(e)
   }
@@ -53,4 +53,37 @@ const deleteUser = async (req,res) => {
   }
 };
 
-module.exports = { loginUser, signupUser, logoutUser, deleteUser, activeUser };
+const getUser = async (req, res) => {
+  try {
+    const {id} = req.query;
+    const user = await User.findById(id);
+    // await req.user.populate({ path: "recipes", limit: 2 , populate: { path: "comments"}}).execPopulate();
+    // await req.user.populate("recipes").execPopulate();
+    res.status(200).send(user.toPublicJSON());
+  } catch(e) {
+    res.status(400).send(e);
+  }
+}
+
+const getUserRecipes = async (req, res) => {
+  try {
+    console.log(req.query);
+    const { id, limit, skip } = req.query;
+    const user = await User.findById(id);
+    await user.populate({ path: "recipes", limit: parseInt(limit), skip: parseInt(skip)}).execPopulate();
+
+    res.status(200).send(user.recipes);
+  } catch(e) {
+    res.status(400).send(e);
+  }
+}
+
+module.exports = {
+  loginUser,
+  signupUser,
+  logoutUser,
+  deleteUser,
+  activeUser,
+  getUser,
+  getUserRecipes,
+};

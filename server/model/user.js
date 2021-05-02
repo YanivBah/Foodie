@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     avatar: {
       type: Buffer,
@@ -33,21 +33,18 @@ const userSchema = new mongoose.Schema(
     },
     isActive: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    // recipes: [{
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   ref: 'Recipe'
-    // }],
-    tokens: [{
-      token: {
-        type: String,
-        required: true
-      }
-    }]
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true } }
 );
 
 userSchema.virtual('recipes', {
@@ -55,6 +52,7 @@ userSchema.virtual('recipes', {
   localField: '_id',
   foreignField: 'owner'
 });
+
 
 userSchema.plugin(uniqueValidator, { message: "is already taken." });
 
@@ -89,13 +87,14 @@ userSchema.methods.generateAuthToken = async function() {
   return token;
 };
 
-userSchema.methods.toJSON = function () {
+userSchema.methods.toPublicJSON = function () {
   const user = this;
   const userObject = user.toObject();
   delete userObject.password;
   delete userObject.tokens;
   return userObject;
 };
+
 
 const User = mongoose.model("User", userSchema);
 
