@@ -55,8 +55,11 @@ const deleteUser = async (req,res) => {
 
 const getUser = async (req, res) => {
   try {
-    const {id} = req.query;
-    const user = await User.findById(id);
+    const {username, id} = req.query;
+    let user;
+    if (username) user = await User.findOne({username});
+    else if (id) user = await User.findById(id);
+    else throw ('wrong queries');
     // await req.user.populate({ path: "recipes", limit: 2 , populate: { path: "comments"}}).execPopulate();
     // await req.user.populate("recipes").execPopulate();
     res.status(200).send(user.toPublicJSON());
