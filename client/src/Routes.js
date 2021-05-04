@@ -9,15 +9,6 @@ const Routes = () => {
     <Router>
       <Navbar/>
       
-      <div>
-        <NavLink to="/">Homepage</NavLink>
-        <br />
-        <NavLink to="/login">Login</NavLink>
-        <br />
-        <NavLink to="/signup">Signup</NavLink>
-        <br />
-        <NavLink to="/profile/">Profile</NavLink>
-      </div>
       <Switch>
         <Route path="/" exact children={<h2>Homepage</h2>} />
         <Route path="/login" exact children={<Login />} />
