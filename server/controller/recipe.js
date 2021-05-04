@@ -92,6 +92,8 @@ const rateRecipe = async (req, res) => {
 
 const getRecipe = async (req, res) => {
   await req.recipe.populate({ path: "ingredients.ingredient"}).execPopulate();
+  await req.recipe.populate({ path: "comments", select: "comments"}).execPopulate();
+  await req.recipe.populate({ path: "owner", select: "username"}).execPopulate();
   res.status(200).send(req.recipe);
 }
 
