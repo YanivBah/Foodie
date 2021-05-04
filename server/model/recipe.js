@@ -20,17 +20,19 @@ const RecipeSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    rating: [{
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User"
+    rating: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "User",
+        },
+        rating: {
+          type: Number,
+          required: true,
+        },
       },
-      rating: {
-        type: Number,
-        required: true
-      }
-    }],
+    ],
     isApproved: {
       type: Boolean,
       default: false,
@@ -42,43 +44,39 @@ const RecipeSchema = new mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User"
+      ref: "User",
     },
     comments: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
+      ref: "Comment",
     },
     instructions: [
       {
         title: {
           type: String,
-          required: true
+          required: true,
         },
         description: {
           type: String,
-          required: true
-        }
-      }
+          required: true,
+        },
+      },
     ],
     ingredients: [
       {
-        // ingredient: {
-        //   type: mongoose.Schema.Types.ObjectId,
-        //   required: true,
-        //   ref: "Ingredients",
-        // },
-        name: {
-          type: String,
-          required: true
+        ingredient: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "Ingredient",
         },
         amount: {
           type: Number,
-          required: true
+          required: true,
         },
         unit: {
           type: String,
-          required: true
-        }
+          required: true,
+        },
       },
     ],
   },

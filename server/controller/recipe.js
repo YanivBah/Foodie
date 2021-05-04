@@ -8,7 +8,7 @@ const addRecipe = async (req, res) => {
       ...req.body,
       owner: req.user._id
     });
-    if (req.user.score > 100 || req.user.permissions.ableToApprove) {
+    if (req.user.permissions.ableToApprove) {
       const comment = new Comment({ recipe: recipe._id });
       recipe.comments = comment._id;
       recipe.isApproved = true;
@@ -20,6 +20,30 @@ const addRecipe = async (req, res) => {
     res.status(400).send(e);
   }
 };
+
+const editRecipe = async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    "id",
+    "title",
+    "description",
+    "instructions",
+    "ingredients",
+    "tags",
+  ];
+  const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+  if (!isValidOperation) throw new Error("Invalid updates!");
+  try {
+    if (req.recipe.owner.toString() !== req.user._id.toString()) {
+      throw new Error("You are now the owner of this recipe");
+    }
+    updates.forEach(update => req.recipe[update] = req.body[update]);
+    await req.recipe.save();
+    res.send(req.recipe);
+  } catch(e) {
+    res.status(400).send(e);
+  }
+}
 
 const approveRecipe = async (req, res) => {
   try {
@@ -55,6 +79,9 @@ const rateRecipe = async (req, res) => {
     req.recipe.rating.push({user: req.user._id, rating: req.body.rating});
     const recipeOwner = await User.findById(req.recipe.owner);
     recipeOwner.score += req.body.rating;
+    if (recipeOwner.score >= 100) {
+      recipeOwner.permissions.ableToApprove = true;
+    }
     recipeOwner.save();
     await req.recipe.save();
     res.status(201).send({message: 'Rating added'});
@@ -63,4 +90,16 @@ const rateRecipe = async (req, res) => {
   }
 };
 
-module.exports = { addRecipe, deleteRecipe, rateRecipe, approveRecipe };
+const getRecipe = async (req, res) => {
+  await req.recipe.populate({ path: "ingredients.ingredient"}).execPopulate();
+  res.status(200).send(req.recipe);
+}
+
+module.exports = {
+  addRecipe,
+  deleteRecipe,
+  rateRecipe,
+  approveRecipe,
+  editRecipe,
+  getRecipe
+};

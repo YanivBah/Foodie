@@ -104,6 +104,7 @@ userSchema.methods.generateAuthToken = async function() {
 userSchema.methods.toPublicJSON = function () {
   const user = this;
   const userObject = user.toObject();
+  delete userObject.permissions;
   delete userObject.password;
   delete userObject.tokens;
   return userObject;

@@ -4,6 +4,7 @@ const cors = require("cors");
 const userRouter = require("./router/user");
 const recipeRouter = require("./router/recipe");
 const commentRouter = require("./router/comment");
+const ingredientRouter = require("./router/ingredient");
 
 mongoose.connect("mongodb://localhost:27017/recipes", {
   useNewUrlParser: true,
