@@ -47,16 +47,33 @@ const AddRecipe = () => {
       <input type="text" id="title" />
       <label htmlFor="description">Description</label>
       <textarea id="description" />
-      <h3>Instructions</h3>
-      <span>Add new step</span>
-      <span className="material-icons" onClick={addStep}>
-        add_circle_outline
-      </span>
+      <div className="steps-title">
+        <h3>Instructions</h3>
+        <div onClick={addStep}>
+          <span>Add new step</span>
+          <span className="material-icons">
+            add_box
+          </span>
+        </div>
+      </div>
       {instructions.map((step, index) => {
         // refs[`step${index + 1}`] = useRef(null);
         return (
           <div className="step" key={index}>
-            <label htmlFor={`step${index + 1}`}>Step {index + 1}</label>
+            <label htmlFor={`step${index + 1}`} className="step-label">
+              <span>Step {index + 1}</span>
+              {index === instructions.length-1 && index !== 0 && (
+                <span
+                  className="material-icons"
+                  onClick={() => {
+                    const splicedArray = [...instructions];
+                    splicedArray.splice(index, 1);
+                    setInstructions(splicedArray);
+                  }}>
+                  delete_forever
+                </span>
+              )}
+            </label>
             <textarea
               id={`step${index + 1}`}
               ref={(e) => (stepsRef.current[`step${index + 1}`] = e)}

@@ -1,12 +1,11 @@
 const config = {
   navbar: [
-    {title: 'Home', target: '/'},
-    {title: 'Recipes', target: '/recipes'},
-    {title: 'Scores', target: '/scores'},
-    {title: 'About', target: '/about'},
+    { title: "Home", target: "/", loggedIn: false },
+    { title: "Recipes", target: "/recipes", loggedIn: false },
+    { title: "Scores", target: "/scores", loggedIn: false },
+    { title: "About", target: "/about", loggedIn: false },
   ],
-  logo: '',
-  
+  logo: "",
 };
 
 export default config;
