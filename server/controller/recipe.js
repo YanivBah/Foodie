@@ -97,11 +97,26 @@ const getRecipe = async (req, res) => {
   res.status(200).send(req.recipe);
 }
 
+const getRecentRecipe = async (req, res) => {
+  try {
+    const { limit } = req.query;
+    const recipes = await Recipe.find()
+      .sort("-createdAt")
+      .limit(parseInt(limit))
+      .populate({ path: "owner", select: "username" })
+      .populate({ path: "ingredients.ingredient" });
+    res.status(200).send(recipes);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+}
+
 module.exports = {
   addRecipe,
   deleteRecipe,
   rateRecipe,
   approveRecipe,
   editRecipe,
-  getRecipe
+  getRecipe,
+  getRecentRecipe,
 };

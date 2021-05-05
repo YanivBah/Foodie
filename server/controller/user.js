@@ -70,7 +70,6 @@ const getUser = async (req, res) => {
 
 const getUserRecipes = async (req, res) => {
   try {
-    console.log(req.query);
     const { id, limit, skip } = req.query;
     const user = await User.findById(id);
     await user.populate({ path: "recipes", limit: parseInt(limit), skip: parseInt(skip)}).execPopulate();

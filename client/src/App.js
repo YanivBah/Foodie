@@ -5,10 +5,22 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [recentRecipes, setRecentRecipes] = useState(null);
+
+  const states = {
+    user: {
+      get: user,
+      set: setUser,
+    },
+    recentRecipes: {
+      get: recentRecipes,
+      set: setRecentRecipes,
+    },
+  };
 
   return (
       <>
-        <Context.Provider value={{user, setUser}}>
+        <Context.Provider value={states}>
           <Routes/>
         </Context.Provider>
       </>

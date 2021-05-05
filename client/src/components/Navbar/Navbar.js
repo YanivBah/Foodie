@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(null);
   const asideNavbar = useRef(null);
@@ -31,7 +32,7 @@ const Navbar = () => {
         }}
       >
         <aside className="navbar-aside slide-animation" ref={asideNavbar}>
-          <span class="material-icons md-36" onClick={handleMenu}>
+          <span className="material-icons md-36" onClick={handleMenu}>
             arrow_back
           </span>
           <NavLink to="/" onClick={handleMenu}>
@@ -51,8 +52,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left" ref={hamburger}>
-        {/* <div className="hamburger" onClick={handleMenu}></div> */}
-        <span class="material-icons md-36" onClick={handleMenu}>
+        <span className="material-icons md-36" onClick={handleMenu}>
           menu
         </span>
       </div>
@@ -62,7 +62,8 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-right">
-        <span class="material-icons md-36">account_circle</span>
+        <span className="material-icons md-36">account_circle</span>
+        <span className="material-icons md-36">notifications</span>
       </div>
     </nav>
   );

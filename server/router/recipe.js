@@ -9,6 +9,7 @@ const {
   approveRecipe,
   editRecipe,
   getRecipe,
+  getRecentRecipe,
 } = require("../controller/recipe");
 
 router.post("/api/recipe/add", auth, addRecipe);
@@ -17,4 +18,5 @@ router.post("/api/recipe/rating", auth, recipe, rateRecipe);
 router.post("/api/recipe/approve", auth, recipe, approveRecipe);
 router.patch("/api/recipe/edit", auth, recipe, editRecipe);
 router.get("/api/recipe/get", recipe, getRecipe);
+router.get("/api/recipe/recent", getRecentRecipe);
 module.exports = router;
