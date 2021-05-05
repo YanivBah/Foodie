@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import axios from 'axios';
-import Context from "../Context";
+import Context from "../../Context";
 import './Login.css';
 
 const Login = () => {

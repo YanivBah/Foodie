@@ -13,7 +13,6 @@ import './RecipeBox.css';
 // };
 
 const RecipeBox = ({ recipes }) => {
-  console.log(recipes);
 
   const recipesMap = () => {
     return recipes.map((recipe, i) => {

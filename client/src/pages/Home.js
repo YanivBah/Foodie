@@ -6,14 +6,14 @@ import Context from "../Context";
 const Home = () => {
   const states = useContext(Context);
 
-  const fetching = async() => {
-    const {data} = await axios.get("/api/recipe/recent?limit=5");
-    states.recentRecipes.set(data);
-  }
-
   useEffect(() => {
+    const fetching = async () => {
+      const { data } = await axios.get("/api/recipe/recent?limit=5");
+      states.recentRecipes.set(data);
+      return null;
+    };
     fetching();
-  }, [])
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="margin-top-100">

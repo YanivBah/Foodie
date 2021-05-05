@@ -38,6 +38,9 @@ const Navbar = () => {
           <NavLink to="/" onClick={handleMenu}>
             Home
           </NavLink>
+          <NavLink to="/add-recipe" onClick={handleMenu}>
+            Add Recipe
+          </NavLink>
           <NavLink to="/login" onClick={handleMenu}>
             Login
           </NavLink>
@@ -63,7 +66,8 @@ const Navbar = () => {
 
       <div className="navbar-right">
         <span className="material-icons md-36">account_circle</span>
-        <span className="material-icons md-36">notifications</span>
+        <span className="material-icons md-36">post_add</span>
+        {/* <span className="material-icons md-36">notifications</span> */}
       </div>
     </nav>
   );
