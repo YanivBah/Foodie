@@ -22,12 +22,18 @@ const Navbar = () => {
 
   const asideMenu = () => {
     return (
-      <div className="navbar-aside-background" onClick={(e) => {
-        if (e.target.classList.contains('navbar-aside-background')) {
-          handleMenu();
-        }
-      }}>
+      <div
+        className="navbar-aside-background"
+        onClick={(e) => {
+          if (e.target.classList.contains("navbar-aside-background")) {
+            handleMenu();
+          }
+        }}
+      >
         <aside className="navbar-aside slide-animation" ref={asideNavbar}>
+          <span class="material-icons md-36" onClick={handleMenu}>
+            arrow_back
+          </span>
           <NavLink to="/" onClick={handleMenu}>
             Home
           </NavLink>
@@ -45,14 +51,19 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left" ref={hamburger}>
-        <div className="hamburger" onClick={handleMenu}></div>
+        {/* <div className="hamburger" onClick={handleMenu}></div> */}
+        <span class="material-icons md-36" onClick={handleMenu}>
+          menu
+        </span>
       </div>
       {menuOpen && asideMenu()}
       <div className="navbar-center">
         <img src="./assets/logo.png" alt="Web Logo" />
       </div>
 
-      <div className="navbar-right">Right</div>
+      <div className="navbar-right">
+        <span class="material-icons md-36">account_circle</span>
+      </div>
     </nav>
   );
 };
