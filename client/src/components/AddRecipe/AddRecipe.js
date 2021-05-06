@@ -1,103 +1,131 @@
-import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import './AddRecipe.css';
+import BasicInput from "./BasicInput";
+import IngredientBox from "./IngredientBox";
+import TagInput from "./TagInput";
+import Step from "./Step";
+import TagBox from "./TagBox";
+import IngredientSetting from "./IngredientSetting";
 
 const AddRecipe = () => {
-  const [tags, setTags] = useState([]);
-  const [instructions, setInstructions] = useState(['']);
-  const [ingredients, setIngredients] = useState([]);
-  const [tagsValue, setTagsValue] = useState('');
+  const [values, setValues] = useState({
+    title: '',
+    description: '',
+    tag: '',
+    steps: {step1: ''},
+    ingredients: [],
+    ingredientSearchTerm: '',
+    ingredientFounded: [],
+    tagInput: '',
+    tags: []
+  });
 
-  const stepsRef = useRef({});
-
-  const addTag = () => {
-    setTags((prevTags) => [...prevTags, tagsValue]);
-    setTagsValue('');
+  const addStep = () => {
+    const length = Object.keys(values.steps).length;
+    const newValues = {...values};
+    newValues.steps[`step${length+1}`] = '';
+    setValues(newValues);
   };
-  const addStep = () => setInstructions(prev => [...prev, '']);
-
-  const viewTags = () => {
-    if (tags.length > 0) {
-      return tags.map((tag, index) => {
-        return (
-          <div className="tag" key={index}>
-            <p>{tag}</p>
-            <span className="material-icons" 
-            onClick={() => {
-              const splicedArray = [...tags];
-              splicedArray.splice(index,1);
-              setTags(splicedArray);
-            }}>
-              clear</span>
-          </div>
-        );
-      })
-    }
-  }
 
   useEffect(() => {
-    if (tags.length === 3) {
-      setTagsValue('');
-    }
-  },[tags])
+    const searchIngredient = async () => {
+      const { data } = await axios.get(
+        `/api/ingredient/search?value=${values.ingredientSearchTerm}`
+      );
+      const newValue = { ...values };
+      newValue.ingredientFounded = data;
+      setValues(newValue);
+    };
+
+    const timeoutid = setTimeout(() => {
+      if (values.ingredientSearchTerm) {
+        searchIngredient();
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(timeoutid);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values.ingredientSearchTerm]); 
 
   return (
     <div className="add-recipe">
       <h1>Add new recipe</h1>
-      <label htmlFor="title">Title</label>
-      <input type="text" id="title" />
-      <label htmlFor="description">Description</label>
-      <textarea id="description" />
+
+      <BasicInput
+        id="title"
+        label="Title"
+        values={values}
+        setValues={setValues}
+        whatToChange="title"
+      />
+
+      <BasicInput
+        id="description"
+        label="Description"
+        values={values}
+        setValues={setValues}
+        whatToChange="description"
+      />
+
       <div className="steps-title">
         <h3>Instructions</h3>
         <div onClick={addStep}>
           <span>Add new step</span>
-          <span className="material-icons">
-            add_box
-          </span>
+          <span className="material-icons">add_box</span>
         </div>
       </div>
-      {instructions.map((step, index) => {
-        // refs[`step${index + 1}`] = useRef(null);
-        return (
-          <div className="step" key={index}>
-            <label htmlFor={`step${index + 1}`} className="step-label">
-              <span>Step {index + 1}</span>
-              {index === instructions.length-1 && index !== 0 && (
-                <span
-                  className="material-icons"
-                  onClick={() => {
-                    const splicedArray = [...instructions];
-                    splicedArray.splice(index, 1);
-                    setInstructions(splicedArray);
-                  }}>
-                  delete_forever
-                </span>
-              )}
-            </label>
-            <textarea
-              id={`step${index + 1}`}
-              ref={(e) => (stepsRef.current[`step${index + 1}`] = e)}
-            ></textarea>
-          </div>
-        );
-      })}
-      <label htmlFor="tags">Tags</label>
-      <div className="tag-input">
-        <input
-          type="text"
-          id="tags"
-          value={tagsValue}
-          onChange={(e) => setTagsValue(e.target.value)}
-          disabled={tags.length === 3 ? true : false}
-          placeholder={tags.length === 3 ? "You can only add 3 tags" : ""}
+
+      {Object.keys(values.steps).map((step, index) => (
+        <Step
+          key={index}
+          number={index + 1}
+          values={values}
+          setValues={setValues}
         />
-        {tagsValue?.length >= 3 && tags.length < 3 ? (
-          <span className="material-icons" onClick={addTag}>
-            add_circle_outline
-          </span>
-        ) : null}
+      ))}
+
+      <div>
+        <h3>Ingredients</h3>
+
+        <BasicInput
+          id="ingredient"
+          label="Search for ingredient"
+          values={values}
+          setValues={setValues}
+          whatToChange="ingredientSearchTerm"
+        />
+
+        <div className="ingredient-select">
+          {values.ingredientFounded.map((ingredient) => (
+            <IngredientBox
+              ingredient={ingredient}
+              values={values}
+              setValues={setValues}
+            />
+          ))}
+        </div>
+        <div className="ingredient-grid">
+          {values.ingredients.map((ingredient, number) => (
+            <IngredientSetting
+              ingredient={ingredient}
+              number={number + 1}
+              values={values}
+              setValues={setValues}
+            />
+          ))}
+        </div>
       </div>
-      <div className="tags">{viewTags()}</div>
+
+      <TagInput values={values} setValues={setValues} />
+
+      <div className="tags">
+        {values.tags.map((tag,index) => (
+          <TagBox key={index} tag={tag} values={values} setValues={setValues} />
+        ))}
+      </div>
     </div>
   );
 }

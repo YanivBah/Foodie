@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(userRouter);
 app.use(recipeRouter);
 app.use(commentRouter);
+app.use(ingredientRouter);
 
 const port = 5000;
 const message =
