@@ -2,7 +2,10 @@ const IngredientBox = ({ ingredient, values, setValues }) => {
 
   const addIngredient = () => {
     const newValues = { ...values };
-    newValues.ingredients = [...newValues.ingredients, ingredient];
+    const newIngredient = { ...ingredient };
+    newIngredient.amount = 0;
+    newIngredient.unit = 'mg';
+    newValues.ingredients = [...newValues.ingredients, newIngredient];
     newValues.ingredientSearchTerm = '';
     newValues.ingredientFounded = [];
     setValues(newValues);

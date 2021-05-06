@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import './AddRecipe.css';
 import BasicInput from "./BasicInput";
 import IngredientBox from "./IngredientBox";
@@ -7,8 +7,11 @@ import TagInput from "./TagInput";
 import Step from "./Step";
 import TagBox from "./TagBox";
 import IngredientSetting from "./IngredientSetting";
+import Context from "../../Context";
 
 const AddRecipe = () => {
+  const states = useContext(Context);
+
   const [values, setValues] = useState({
     title: '',
     description: '',
@@ -18,8 +21,47 @@ const AddRecipe = () => {
     ingredientSearchTerm: '',
     ingredientFounded: [],
     tagInput: '',
-    tags: []
+    tags: [],
+    file: {
+      raw: null,
+      preview: null
+    }
   });
+
+  const handleAddingRecipe = async() => {
+    const body = {
+      title: values.title,
+      description: values.description,
+      tags: values.tags,
+      instructions: [],
+      ingredients: []
+    };
+    Object.keys(values.steps).forEach(key => {
+      body.instructions.push({title: key, description: values.steps[key]});
+    });
+    values.ingredients.forEach(ingre => {
+      body.ingredients.push({ingredient: ingre._id, amount: ingre.amount, unit: ingre.unit});
+    });
+
+    const formData = new FormData();
+    formData.append('image', values.file.raw);
+    formData.append('body', JSON.stringify(body));
+    
+    const { data } = await axios.post("/api/recipe/add", formData, {
+      headers: {'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${states.user.get.token}`}
+    });
+    console.log(data);
+  }
+
+  const handleFileInput = async(e) => {
+    if (e.target.files.length) {
+      const newValues = {...values};
+      newValues.file.raw = e.target.files[0];
+      newValues.file.preview = URL.createObjectURL(e.target.files[0]);
+      setValues(newValues);
+    }
+  }
 
   const addStep = () => {
     const length = Object.keys(values.steps).length;
@@ -53,6 +95,22 @@ const AddRecipe = () => {
   return (
     <div className="add-recipe">
       <h1>Add new recipe</h1>
+      {values.file.preview && (
+        <img
+          src={values.file.preview}
+          alt="Your upload img"
+          className="upload-preview"
+        />
+      )}
+      <input
+        type="file"
+        id="upload"
+        className="inputfile"
+        onChange={handleFileInput}
+      />
+      <label htmlFor="upload">
+        {!values.file.raw ? "Chose a image" : "Upload different"}
+      </label>
 
       <BasicInput
         id="title"
@@ -122,10 +180,12 @@ const AddRecipe = () => {
       <TagInput values={values} setValues={setValues} />
 
       <div className="tags">
-        {values.tags.map((tag,index) => (
+        {values.tags.map((tag, index) => (
           <TagBox key={index} tag={tag} values={values} setValues={setValues} />
         ))}
       </div>
+
+      <button onClick={handleAddingRecipe}>Send</button>
     </div>
   );
 }

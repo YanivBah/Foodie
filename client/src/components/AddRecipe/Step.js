@@ -26,11 +26,21 @@ const Step = ({ number, values, setValues }) => {
 
   return (
     <div className="step">
-      <label htmlFor={`step${number}`}>
-        <span>Step {number}</span>
-        {createDeleteIcon()}
-      </label>
-      <textarea id={`step${number}`} value={values.steps[`step${number}`]} onChange={handleChange}></textarea>
+      <details>
+        <summary>
+          Step {number}
+          {createDeleteIcon()}
+        </summary>
+        {/* <label htmlFor={`step${number}`}> */}
+        {/* <span>Step {number}</span> */}
+        {/* {createDeleteIcon()} */}
+        {/* </label> */}
+        <textarea
+          id={`step${number}`}
+          value={values.steps[`step${number}`]}
+          onChange={handleChange}
+        ></textarea>
+      </details>
     </div>
   );
 };

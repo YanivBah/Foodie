@@ -3,18 +3,28 @@
 }
 .add-recipe label {
   display: block;
-  width: 100%;
-  background: rgb(204, 204, 204);
   margin-top: 10px;
   padding: 5px 10px;
 }
 .add-recipe input {
   display: block;
   width: 100%;
-  border-radius: 0;
+  border-radius: 3px;
   border: 1px solid rgb(204, 204, 204);
-  padding: 5px 10px;
-  outline: none;
+  padding: 9px 10px;
+  margin-bottom: 20px;
+}
+.add-recipe select {
+  background: white;
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 7.5px 10px;
+  margin-bottom: 20px;
+}
+.add-recipe input:focus {
+  outline: 1px solid rgb(46, 154, 255);
 }
 .add-recipe textarea {
   width: 100%;
@@ -93,6 +103,42 @@
 
 .add-recipe .ingredient-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
   gap: 20px;
+}
+
+.add-recipe .ingre-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.add-recipe .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.add-recipe .inputfile + label {
+  border: none;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  color: white;
+  background-color: black;
+  display: inline-block;
+}
+
+.add-recipe .inputfile:focus + label,
+.add-recipe .inputfile + label:hover {
+  background-color: rgb(51, 51, 51);
+  border: 1px solid rgb(46, 154, 255);
+}
+
+.add-recipe .upload-preview {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }

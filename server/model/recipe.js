@@ -39,7 +39,7 @@ const RecipeSchema = new mongoose.Schema(
     },
     image: {
       type: Buffer,
-      default: "",
+      default: null,
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,

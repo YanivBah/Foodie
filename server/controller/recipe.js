@@ -1,13 +1,38 @@
+const sharp = require("sharp");
 const Recipe = require("../model/recipe");
 const Comment = require("../model/comment");
 const User = require("../model/user");
 
+// router.post(
+//   "/api/image/test",
+//   upload.single("image"),
+//   async (req, res) => {
+//     const buffer = await sharp(req.file.buffer)
+//       .resize({ width: 500 })
+//       .jpeg({ quality: 80 })
+//       .toBuffer();
+
+//     res.send(obj);
+//   },
+//   (error, req, res, next) => {
+//     res.status(400).send({ error: error.message });
+//   }
+// );
+
 const addRecipe = async (req, res) => {
   try {
+    const buffer = await sharp(req.file.buffer)
+      .resize({width: 500})
+      .jpeg({quality: 80})
+      .toBuffer();
+    const body = JSON.parse(req.body.body);
+    body.ingredients.forEach(ing => ing.amount = parseInt(ing.amount));
+    body.image = buffer;
     const recipe = new Recipe({
-      ...req.body,
+      ...body,
       owner: req.user._id
     });
+
     if (req.user.permissions.ableToApprove) {
       const comment = new Comment({ recipe: recipe._id });
       recipe.comments = comment._id;
@@ -17,6 +42,7 @@ const addRecipe = async (req, res) => {
     await recipe.save();
     res.status(201).send(recipe);
   } catch (e) {
+    console.dir(e);
     res.status(400).send(e);
   }
 };
