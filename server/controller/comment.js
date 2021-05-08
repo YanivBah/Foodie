@@ -7,9 +7,10 @@ const addComment = async (req, res) => {
       user: req.user._id,
       content: req.body.content
     }
-    comments.comments.push(comment);
+    comments.comments.unshift(comment);
     await comments.save();
-    res.status(201).send(comments.comments[comments.comments.length-1]);
+    await comments.populate({ path: "comments.user", select: "username" }).execPopulate();
+    res.status(201).send(comments.comments[0]);
   } catch (e) {
     res.status(400).send(e);
   }

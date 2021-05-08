@@ -122,7 +122,11 @@ const getRecipe = async (req, res) => {
     const recipe = await Recipe.findById(id);
     await recipe.populate({ path: "ingredients.ingredient" }).execPopulate();
     await recipe
-      .populate({ path: "comments", select: "comments" })
+      .populate({
+        path: "comments",
+        select: "comments",
+        populate: { path: "comments.user", select: "username -_id" },
+      })
       .execPopulate();
     await recipe.populate({ path: "owner", select: "username" }).execPopulate();
     recipe.image = undefined;

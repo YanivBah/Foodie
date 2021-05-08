@@ -1,5 +1,5 @@
 .container {
-  margin: 100px 1.4rem 50px 1.4rem;
+  margin: 100px 1.4rem 25px 1.4rem;
   /* background: rgb(235, 235, 235); */
   border: 1px solid rgba(48, 48, 48, 0.404);
   border-radius: 3px;
@@ -39,7 +39,7 @@
   padding: 1rem 0.8rem 0;
 }
 .separator {
-  width: 90%;
+  width: 95%;
   height: 1px;
   margin: 20px auto;
   padding: 0 15px;
@@ -48,4 +48,75 @@
 
 .ingredients {
   padding: 0 0.8rem;
+}
+.ingredients h3 {
+  margin-bottom: 10px;
+}
+.ingredients p span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgb(244, 244, 244);
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  /* border: 1px solid gray; */
+  box-shadow: 1px 0px 1px rgb(136, 136, 136);
+}
+
+.instructions {
+  padding: 0 0.8rem;
+}
+.instructions h3 {
+  margin-bottom: 10px;
+}
+
+.instruction {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.instruction .number {
+  margin-right: 20px;
+  font-size: 25px;
+  position: relative;
+  padding: 0 10px 0 0;
+  border-right: 2px solid black;
+}
+
+.comments {
+  padding: 0 0.8rem;
+  margin-bottom: 20px;
+}
+.comments h3 {
+  margin-bottom: 10px;
+}
+.add-comment {
+  margin: 20px 1.4rem 50px 1.4rem;
+}
+.add-comment label {
+  display: block;
+}
+
+.add-comment textarea {
+  width: 100%;
+  resize: none;
+  height: 70px;
+  /* border-radius: 20px; */
+  border: 1px solid gray;
+  outline: none;
+  padding: 5px 10px;
+}
+
+.add-comment button {
+  display: block;
+  margin: 0 auto;
+  padding: 6px 12px;
+  background: black;
+  border: none;
+  color: whitesmoke;
+  font-weight: bold;
+  border-radius: 15px;
 }
