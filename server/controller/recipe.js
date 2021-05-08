@@ -117,10 +117,19 @@ const rateRecipe = async (req, res) => {
 };
 
 const getRecipe = async (req, res) => {
-  await req.recipe.populate({ path: "ingredients.ingredient"}).execPopulate();
-  await req.recipe.populate({ path: "comments", select: "comments"}).execPopulate();
-  await req.recipe.populate({ path: "owner", select: "username"}).execPopulate();
-  res.status(200).send(req.recipe);
+  try {
+    const { id } = req.query;
+    const recipe = await Recipe.findById(id);
+    await recipe.populate({ path: "ingredients.ingredient" }).execPopulate();
+    await recipe
+      .populate({ path: "comments", select: "comments" })
+      .execPopulate();
+    await recipe.populate({ path: "owner", select: "username" }).execPopulate();
+    recipe.image = undefined;
+    res.status(200).send(recipe);
+  } catch (e) {
+    res.status(400).send(e);
+  }
 }
 
 const getRecentRecipe = async (req, res) => {
@@ -137,6 +146,18 @@ const getRecentRecipe = async (req, res) => {
   }
 }
 
+const getRecipeImage = async (req, res) => {
+  try {
+    const { id } = req.query;
+    const recipe = await Recipe.findById(id);
+    if (!recipe.image) throw new Error();
+    res.set('Content-Type','image/jpg');
+    res.send(recipe.image);
+  } catch (e) {
+    res.status(404).send();
+  }
+}
+
 module.exports = {
   addRecipe,
   deleteRecipe,
@@ -145,4 +166,5 @@ module.exports = {
   editRecipe,
   getRecipe,
   getRecentRecipe,
+  getRecipeImage,
 };

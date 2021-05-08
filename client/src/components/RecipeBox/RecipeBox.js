@@ -21,7 +21,7 @@ const RecipeBox = ({ recipes }) => {
           <div className="recipe-box">
             <div className="recipe-box--image">
               <img
-                src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-chicken-tikka-masala-jpg-1526059261.jpg"
+                src={`/api/recipe/image?id=${recipe._id}`}
                 alt={`${recipe.title} img`}
               />
               <div className="recipe-box--overlay-bottom">

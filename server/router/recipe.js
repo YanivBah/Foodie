@@ -12,6 +12,7 @@ const {
   editRecipe,
   getRecipe,
   getRecentRecipe,
+  getRecipeImage,
 } = require("../controller/recipe");
 
 router.post("/api/recipe/add", auth, upload.single("image"), addRecipe);
@@ -19,7 +20,8 @@ router.delete("/api/recipe/delete", auth, recipe, deleteRecipe);
 router.post("/api/recipe/rating", auth, recipe, rateRecipe);
 router.post("/api/recipe/approve", auth, recipe, approveRecipe);
 router.patch("/api/recipe/edit", auth, recipe, editRecipe);
-router.get("/api/recipe/get", recipe, getRecipe);
+router.get("/api/recipe/get", getRecipe);
+router.get("/api/recipe/image", getRecipeImage);
 router.get("/api/recipe/recent", getRecentRecipe);
 
 // router.get('/imageserving/:id', async (req, res) => {

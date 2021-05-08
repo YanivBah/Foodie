@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
 import Context from "./Context";
 import AddRecipe from './components/AddRecipe/AddRecipe';
+import Recipe from './pages/Recipe';
 
 const Routes = () => {
   const states = useContext(Context);
@@ -33,7 +34,7 @@ const Routes = () => {
         <Route path="/profile/:username" exact children={<Profile />} />
 
         <Route path="/recipe/:recipeID" exact>
-          <div>Recipe</div>
+          <Recipe/>
         </Route>
 
         <Route path="/profile/:username" exact>

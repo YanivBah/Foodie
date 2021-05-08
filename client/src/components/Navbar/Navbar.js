@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -61,7 +61,9 @@ const Navbar = () => {
       </div>
       {menuOpen && asideMenu()}
       <div className="navbar-center">
-        <img src="./assets/logo.png" alt="Web Logo" />
+        <Link to="/">
+         <img src="/assets/logo.png" alt="Web Logo" />
+        </Link>
       </div>
 
       <div className="navbar-right">

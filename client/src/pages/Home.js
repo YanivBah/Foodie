@@ -17,6 +17,7 @@ const Home = () => {
 
   return (
     <div className="margin-top-100">
+      <h2>Recent recipes</h2>
       <RecipeBox recipes={states.recentRecipes.get} />
     </div>
   );

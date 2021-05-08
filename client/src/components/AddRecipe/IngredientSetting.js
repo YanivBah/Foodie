@@ -43,12 +43,14 @@ const IngredientSetting = ({ ingredient, values, setValues, number }) => {
               value={ingredient.unit}
               onChange={changeUnit}
             >
+              <option value="whole">whole</option>
               <option value="mg">mg</option>
               <option value="ml">ml</option>
               <option value="oz">oz</option>
               <option value="tsp">tsp</option>
-              <option value="tbps">tbps</option>
+              <option value="tbsp">tbsp</option>
               <option value="cup">cup</option>
+              <option value="lb">lb</option>
             </select>
           </div>
         </div>
