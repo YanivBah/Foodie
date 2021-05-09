@@ -1,0 +1,72 @@
+.navbar {
+  @apply flex justify-between items-center shadow-lg fixed z-50 bg-white px-6 w-full;
+}
+.navbar * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.navbar--center img {
+  @apply w-28;
+}
+
+.navbar .material-icons {
+  @apply text-4xl;
+}
+
+.navbar--side-bg {
+  @apply absolute top-0 left-0 w-screen h-screen;
+  animation: background-to-black 0.4s linear both;
+}
+
+.navbar--side {
+  @apply absolute h-screen w-5/12 top-0 left-0 flex flex-col bg-white shadow-lg pt-32;
+}
+
+.navbar--side .back {
+  @apply absolute top-5 left-5 bg-red-500 rounded-full text-white px-2;
+}
+
+.navbar--side a {
+  @apply px-2 py-3 border-gray-500 border-b;
+}
+
+.slide-animation {
+  animation: slide-from-left 0.4s linear both;
+}
+.slide-animation-back {
+  animation: slide-to-left 0.4s linear both;
+}
+
+@keyframes slide-from-left {
+  0% {
+    transform: translateX(-500px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-to-left {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
+
+@keyframes background-to-black {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+  }
+}

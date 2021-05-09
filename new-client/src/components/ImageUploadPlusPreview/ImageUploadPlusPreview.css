@@ -1,0 +1,16 @@
+.inputfile {
+  @apply opacity-0 overflow-hidden absolute;
+  z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+}
+
+.inputfile + label {
+  @apply rounded px-3 border-b-4 border-l-2 shadow-lg bg-red-500 border-red-600 text-white;
+  @apply transition-all focus:outline-none focus:ring ring-red-300 text-center block w-4/6;
+  margin: 10px auto;
+}
+
+.image-preview {
+  @apply rounded border object-contain w-full h-48;
+}

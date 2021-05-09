@@ -1,0 +1,33 @@
+.alert {
+  @apply p-4 rounded shadow-lg mx-auto max-w-sm w-3/4 border absolute top-0 left-1/2 mt-20;
+  transform: translateX(-50%) translateY(-1000px);
+  z-index: 9999;
+  animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.alert.red {
+  @apply bg-red-50 text-red-600 border-red-500;
+}
+
+.alert.green {
+  @apply bg-green-50 text-green-600 border-green-500;
+}
+
+.alert.yellow {
+  @apply bg-yellow-50 text-yellow-600 border-yellow-500;
+}
+
+.alert .heading {
+  @apply flex items-baseline gap-4 font-semibold text-xl;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateX(-50%) translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}

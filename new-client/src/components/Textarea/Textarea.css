@@ -1,0 +1,8 @@
+.label {
+  @apply block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2;
+}
+
+.textarea {
+  @apply appearance-none block w-full bg-gray-100 border border-gray-300 rounded py-3 px-4 mb-3;
+  @apply outline-none focus:ring-1 resize-none;
+}

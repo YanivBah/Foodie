@@ -1,0 +1,16 @@
+.signup {
+  @apply pt-28 px-4;
+}
+.signup .header {
+  @apply text-center mb-5;
+}
+
+.signup .header h1 {
+  @apply text-xl font-semibold;
+}
+.signup .header p {
+  @apply font-light;
+}
+.signup .header p a {
+  @apply font-medium;
+}

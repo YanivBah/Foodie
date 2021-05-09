@@ -1,0 +1,18 @@
+.label {
+  @apply block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2;
+}
+
+.input {
+  @apply appearance-none block w-full bg-gray-100 border border-gray-300 rounded py-3 px-4 mb-3;
+  @apply outline-none focus:ring-1;
+}
+.add-tag-input .input[disabled] {
+  @apply opacity-60 ring-1 ring-red-300 bg-red-100;
+}
+.add-tag-input {
+  @apply relative;
+}
+.add-tag-input span {
+  @apply absolute top-1/2 right-3;
+  transform: translateY(-50%);
+}

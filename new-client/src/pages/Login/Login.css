@@ -1,0 +1,16 @@
+.login {
+  @apply pt-28 px-4;
+}
+.login .header {
+  @apply text-center mb-5;
+}
+
+.login .header h1 {
+  @apply text-xl font-semibold;
+}
+.login .header p {
+  @apply font-light;
+}
+.login .header p a {
+  @apply font-medium;
+}

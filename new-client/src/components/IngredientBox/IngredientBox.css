@@ -1,0 +1,3 @@
+.ingredient-box {
+  @apply block border border-gray-300 py-1 px-4 mb-3 mx-5 flex justify-between;
+}

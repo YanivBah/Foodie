@@ -1,0 +1,5 @@
+.button {
+  @apply rounded px-3 border-b-4 border-l-2 shadow-lg bg-red-500 border-red-600 text-white;
+  @apply block transition-all focus:outline-none focus:ring ring-red-300;
+  margin: 0 auto;
+}

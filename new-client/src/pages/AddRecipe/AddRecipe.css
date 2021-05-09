@@ -1,0 +1,27 @@
+.add-recipe {
+  @apply pt-28 px-4;
+}
+.add-recipe h1 {
+  @apply text-2xl;
+}
+.add-recipe h1 + p {
+  @apply text-sm mb-3;
+}
+
+.tags-container {
+  @apply flex justify-around mb-4;
+}
+.heading-tertiary {
+  @apply text-lg font-semibold mt-7;
+}
+.heading-tertiary span {
+  @apply font-extralight;
+}
+.buttons {
+  @apply flex justify-between my-10;
+}
+
+.add-step {
+  @apply px-3 py-1 bg-blue-500 rounded text-white justify-center flex w-32;
+  margin: 0 auto;
+}

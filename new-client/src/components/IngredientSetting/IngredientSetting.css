@@ -1,0 +1,31 @@
+.ingredient-grid {
+  @apply grid grid-cols-2 gap-4;
+}
+.ingredient-setting {
+  @apply mb-1 px-1;
+}
+.dropdown {
+  @apply appearance-none block w-full bg-gray-100 border border-gray-300 rounded py-3 px-4 mb-3;
+  @apply outline-none focus:ring-1;
+}
+.ingredient-header {
+  @apply flex justify-between items-center;
+}
+.ingredient-header .material-icons {
+  @apply opacity-80 rounded-full mx-1;
+  padding: 2px;
+}
+.ingredient-header .material-icons.red {
+  @apply bg-red-500;
+}
+.ingredient-header .material-icons.blue {
+  @apply bg-blue-500;
+}
+.ingredient-header h4 {
+  @apply font-medium;
+}
+
+.ingredient-header .details {
+  @apply font-extralight;
+}
+/* @apply mb-2 px-2 py-1 rounded-t-full bg-red-500; */

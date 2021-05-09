@@ -1,0 +1,13 @@
+.step-textarea label {
+  @apply flex justify-between items-center;
+}
+.step-textarea .material-icons {
+  @apply opacity-80 rounded-full mx-1 text-black;
+  padding: 2px;
+}
+.step-textarea .material-icons.red {
+  @apply bg-red-500;
+}
+.step-textarea .material-icons.blue {
+  @apply bg-blue-500;
+}
