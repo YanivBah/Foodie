@@ -29,13 +29,24 @@
   @apply px-3;
 }
 .recipe .ingredients h3,
-.recipe .instructions h3 {
+.recipe .instructions h3,
+.recipe .comments h3 {
   @apply text-xl font-bold text-gray-700;
 }
 .recipe .ingredients h3 + p,
-.recipe .instructions h3 + p {
+.recipe .instructions h3 + p,
+.recipe .comments h3 + p {
   @apply text-xs mb-4 text-gray-500;
 }
 .recipe .instructions {
   @apply px-3 my-4;
+}
+.recipe .comments {
+  @apply px-3 mb-8;
+}
+.recipe .comments h3 {
+  @apply mb-4;
+}
+.recipe .comments h3 span {
+  @apply font-light;
 }

@@ -3,6 +3,8 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Button } from '../../components/Button/Button';
+import { CommentView } from '../../components/CommentView/CommentView';
 import { IngredientView } from '../../components/IngredientView/IngredientView';
 import { StepView } from '../../components/StepView/StepView';
 import './Recipe.css';
@@ -20,18 +22,20 @@ export const Recipe = () => {
   const { recipeID } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [comments, setComments] = useState([]);
+  const [commentsLength, setCommentsLength] = useState([]);
 
   const fetchComments = async (what = '') => {
     if (what === 'reload') {
       const { data } = await axios.get(
         `/api/comment/get?id=${recipe.comments}&limit=0&skip=2`
       );
+      console.log(data);
       setComments(data);
     } else {
       const moreComments = await axios.get(
         `/api/comment/get?id=${recipe.comments}&limit=${comments.length}&skip=${comments.length+2}`
       );
-      setComments((prev) => [...prev, moreComments.data]);
+      setComments((prev) => prev.concat(moreComments.data));
     }
   };
 
@@ -39,20 +43,23 @@ export const Recipe = () => {
     const fetchRecipe = async() => {
       const { data } = await axios.get(`/api/recipe/get?id=${recipeID}`);
       console.log(data);
-      data.ingredients.sort((ing1, ing2) => {
-        if (ing1.ingredient.name.length < ing2.ingredient.name.length) return -1
-        if (ing1.ingredient.name.length > ing2.ingredient.name.length) return 1
+      data.recipe.ingredients.sort((ing1, ing2) => {
+        if (ing1.ingredient.name.length < ing2.ingredient.name.length) return -1;
+        if (ing1.ingredient.name.length > ing2.ingredient.name.length) return 1;
         return 0;
       });
-      setRecipe(data)
+      setRecipe(data.recipe);
+      setCommentsLength(data.commentLength)
     }
     fetchRecipe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (recipe) {
       fetchComments('reload');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[recipe])
 
   const getDate = () => {
@@ -89,14 +96,26 @@ export const Recipe = () => {
           <div className="ingredients">
             <h3>Ingredients</h3>
             <p>Click on the number to check the ingredient.</p>
-            {recipe.ingredients.map((ing, index) => <IngredientView key={index} ingredient={ing} index={index}/>)}
+            {recipe.ingredients.map((ing, index) => (
+              <IngredientView key={index} ingredient={ing} index={index} />
+            ))}
           </div>
           <div className="instructions">
             <h3>Instructions</h3>
             <p>Follow the steps carefully or you'll be sorry.</p>
-            {recipe.instructions.map((ins,index) => (
-              <StepView instruction={ins} key={index} index={index}/>
+            {recipe.instructions.map((ins, index) => (
+              <StepView instruction={ins} key={index} index={index} />
             ))}
+          </div>
+          <div className="comments">
+            <h3>
+              Comments <span>({commentsLength})</span>
+            </h3>
+            {comments &&
+              comments.map((comment) => <CommentView key={comment._id} comment={comment} />)}
+            {comments.length !== commentsLength && (
+              <Button text="Load More" onClick={fetchComments} />
+            )}
           </div>
         </main>
       )}

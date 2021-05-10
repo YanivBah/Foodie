@@ -1,0 +1,28 @@
+.comment {
+  @apply flex mb-2;
+}
+.comment img {
+  @apply w-12 h-12 mr-3;
+}
+.comment .details {
+  @apply border rounded-md w-full;
+}
+
+.comment .details .meta {
+  @apply font-semibold mb-1 flex items-center;
+}
+.comment .details .meta span {
+  @apply font-light text-xs ml-2 text-gray-800;
+}
+.comment .details .content {
+  @apply px-3 text-gray-600;
+}
+.comment .details .controls .material-icons {
+  @apply text-xl rounded-full text-white px-1;
+}
+.comment .details .controls .material-icons.blue {
+  @apply bg-blue-500;
+}
+.comment .details .controls .material-icons.red {
+  @apply bg-red-500;
+}
