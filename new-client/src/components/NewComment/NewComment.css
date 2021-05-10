@@ -1,0 +1,6 @@
+.new-comment {
+  @apply mt-8;
+}
+.new-comment h4 {
+  @apply text-lg text-gray-700;
+}

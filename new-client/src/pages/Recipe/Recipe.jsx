@@ -1,12 +1,14 @@
 import axios from 'axios';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { Children, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
 import { CommentView } from '../../components/CommentView/CommentView';
 import { IngredientView } from '../../components/IngredientView/IngredientView';
+import { NewComment } from '../../components/NewComment/NewComment';
 import { StepView } from '../../components/StepView/StepView';
+import Context from "../../Context";
 import './Recipe.css';
 
 const momentConfig = {
@@ -18,7 +20,8 @@ const momentConfig = {
   sameElse: "DD/MM/YYYY",
 };
 
-export const Recipe = () => {
+  export const Recipe = () => {
+  const { user } = useContext(Context);
   const { recipeID } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [comments, setComments] = useState([]);
@@ -112,10 +115,22 @@ export const Recipe = () => {
               Comments <span>({commentsLength})</span>
             </h3>
             {comments &&
-              comments.map((comment) => <CommentView key={comment._id} comment={comment} />)}
+              comments.map((comment, index) => (
+                <CommentView
+                  key={index}
+                  comment={comment}
+                  setCommentsLength={setCommentsLength}
+                  setComments={setComments}
+                />
+              ))}
             {comments.length !== commentsLength && (
               <Button text="Load More" onClick={fetchComments} />
             )}
+            {user.get?.user && (<NewComment
+              setCommentsLength={setCommentsLength}
+              setComments={setComments}
+              recipeID={recipe._id}
+            />)}
           </div>
         </main>
       )}
