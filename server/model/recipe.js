@@ -52,14 +52,10 @@ const RecipeSchema = new mongoose.Schema(
     },
     instructions: [
       {
-        title: {
+        content: {
           type: String,
           required: true,
-        },
-        description: {
-          type: String,
-          required: true,
-        },
+        }
       },
     ],
     ingredients: [

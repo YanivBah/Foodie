@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { IngredientView } from '../../components/IngredientView/IngredientView';
+import { StepView } from '../../components/StepView/StepView';
 import './Recipe.css';
 
 const momentConfig = {
@@ -18,6 +19,21 @@ const momentConfig = {
 export const Recipe = () => {
   const { recipeID } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const [comments, setComments] = useState([]);
+
+  const fetchComments = async (what = '') => {
+    if (what === 'reload') {
+      const { data } = await axios.get(
+        `/api/comment/get?id=${recipe.comments}&limit=0&skip=2`
+      );
+      setComments(data);
+    } else {
+      const moreComments = await axios.get(
+        `/api/comment/get?id=${recipe.comments}&limit=${comments.length}&skip=${comments.length+2}`
+      );
+      setComments((prev) => [...prev, moreComments.data]);
+    }
+  };
 
   useEffect(() => {
     const fetchRecipe = async() => {
@@ -27,11 +43,17 @@ export const Recipe = () => {
         if (ing1.ingredient.name.length < ing2.ingredient.name.length) return -1
         if (ing1.ingredient.name.length > ing2.ingredient.name.length) return 1
         return 0;
-      })
-      setRecipe(data);
+      });
+      setRecipe(data)
     }
     fetchRecipe();
   }, []);
+
+  useEffect(() => {
+    if (recipe) {
+      fetchComments('reload');
+    }
+  },[recipe])
 
   const getDate = () => {
     if (recipe.updatedAt !== recipe.createdAt) {
@@ -41,7 +63,6 @@ export const Recipe = () => {
     const createdAt = `Uploaded at \n${moment().calendar(recipe.createdAt, momentConfig)}`
     return createdAt;
   }
-
   return (
     <div className="recipe">
       {recipe && (
@@ -68,7 +89,14 @@ export const Recipe = () => {
           <div className="ingredients">
             <h3>Ingredients</h3>
             <p>Click on the number to check the ingredient.</p>
-            {recipe.ingredients.map((ing, index) => <IngredientView ingredient={ing} index={index}/>)}
+            {recipe.ingredients.map((ing, index) => <IngredientView key={index} ingredient={ing} index={index}/>)}
+          </div>
+          <div className="instructions">
+            <h3>Instructions</h3>
+            <p>Follow the steps carefully or you'll be sorry.</p>
+            {recipe.instructions.map((ins,index) => (
+              <StepView instruction={ins} key={index} index={index}/>
+            ))}
           </div>
         </main>
       )}

@@ -121,14 +121,15 @@ const getRecipe = async (req, res) => {
     const { id } = req.query;
     const recipe = await Recipe.findById(id);
     await recipe.populate({ path: "ingredients.ingredient" }).execPopulate();
-    await recipe
-      .populate({
-        path: "comments",
-        select: "comments",
-        populate: { path: "comments.user", select: "username -_id" },
-      })
-      .execPopulate();
-    await recipe.populate({ path: "owner", select: "username" }).execPopulate();
+    // await recipe
+    //   .populate({
+    //     path: "comments",
+    //     select: "comments",
+    //     options: {limit: 1},
+    //     populate: { path: "comments.user", select: "username -_id" },
+    //   })
+    //   .execPopulate();
+      await recipe.populate({ path: "owner", select: "username" }).execPopulate();
     recipe.image = undefined;
     res.status(200).send(recipe);
   } catch (e) {

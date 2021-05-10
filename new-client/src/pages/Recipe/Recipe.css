@@ -28,9 +28,14 @@
 .recipe .ingredients {
   @apply px-3;
 }
-.recipe .ingredients h3 {
+.recipe .ingredients h3,
+.recipe .instructions h3 {
   @apply text-xl font-bold text-gray-700;
 }
-.recipe .ingredients h3 + p {
+.recipe .ingredients h3 + p,
+.recipe .instructions h3 + p {
   @apply text-xs mb-4 text-gray-500;
+}
+.recipe .instructions {
+  @apply px-3 my-4;
 }
