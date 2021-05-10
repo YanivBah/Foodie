@@ -26,3 +26,6 @@
 .comment .details .controls .material-icons.red {
   @apply bg-red-500;
 }
+.comment .details .content p {
+  @apply break-all;
+}

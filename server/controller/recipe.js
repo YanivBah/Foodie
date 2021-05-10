@@ -129,9 +129,10 @@ const getRecipe = async (req, res) => {
     //     populate: { path: "comments.user", select: "username -_id" },
     //   })
     //   .execPopulate();
-      await recipe.populate({ path: "owner", select: "username" }).execPopulate();
+      await recipe.populate({ path: "owner", select: "username"}).execPopulate();
+    const comments = await Comment.findById(recipe.comments);
     recipe.image = undefined;
-    res.status(200).send(recipe);
+    res.status(200).send({ recipe, commentLength: comments.comments.length });
   } catch (e) {
     res.status(400).send(e);
   }

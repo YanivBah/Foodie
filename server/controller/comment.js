@@ -49,7 +49,6 @@ const deleteComment = async (req, res) => {
 const getComments = async (req, res) => {
   try {
     const { id, limit, skip } = req.query;
-    console.log(id, parseInt(limit), parseInt(skip));
     if (!limit || !skip) throw new Error('missing queries')
     const comments = await Comment.findById(id).populate({path: "comments.user", select: "username"});
     const sliced = comments.comments.slice(parseInt(limit),parseInt(skip));
