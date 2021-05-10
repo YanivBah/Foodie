@@ -1,0 +1,27 @@
+.recipe {
+  @apply flex justify-center pt-28 px-4;
+}
+.recipe main {
+  @apply rounded-t-lg overflow-hidden shadow-xl;
+}
+.recipe h1 {
+  @apply mt-4 text-2xl px-3 text-gray-700 font-bold;
+}
+.recipe .description {
+  @apply px-3 text-base leading-5 tracking-tight text-justify text-gray-600;
+}
+.recipe--image {
+  @apply object-cover w-full h-64;
+}
+.recipe .meta {
+  @apply my-3 px-3 text-gray-600 flex justify-between items-center;
+}
+.recipe .meta .user {
+  @apply flex items-center;
+}
+.recipe .meta .user img {
+  @apply w-12 mr-3;
+}
+.recipe .meta .user a {
+  @apply underline font-medium;
+}

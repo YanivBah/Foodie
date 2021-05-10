@@ -18,7 +18,7 @@ export const AddRecipe = () => {
   const [inputValues, setInputValues] = useState({
     title: "",
     description: "",
-    steps: [{content: ''}],
+    steps: [{ content: "" }, { content: "" }],
     ingredients: [],
     ingredientSearch: "",
     ingredientsFounded: [],
@@ -26,8 +26,8 @@ export const AddRecipe = () => {
     tags: [],
     file: {
       raw: null,
-      preview: null
-    }
+      preview: null,
+    },
   });
   // Here is the Error Handing
   const changePage = (type) => {
@@ -69,6 +69,16 @@ export const AddRecipe = () => {
             return alertPopup(
               "Missing amount",
               "One or more of your ingredients missing amount field.",
+              "red",
+              2500
+            );
+          }
+            break;
+        case 2:
+          if (inputValues.steps.some((step) => step.content.length === 0)) {
+            return alertPopup(
+              "Missing instructions",
+              "One or more of the steps is missing.\nDelete one or add text.",
               "red",
               2500
             );
@@ -231,23 +241,13 @@ export const AddRecipe = () => {
 
           {inputValues.steps.map((step, index) => (
             <StepTextarea
+              key={index}
               values={inputValues}
               onChange={setInputValues}
               index={index}
               maxLength="600"
               rows="3"
             />
-            // <Textarea
-            //   key={`step${index}`}
-            //   name={`step${index}`}
-            //   label={`Step ${index + 1}`}
-            //   placeholder=""
-            //   onChange={setInputValues}
-            //   values={inputValues}
-            //   whatToChange={["steps", index, "content"]}
-            //   maxLength="160"
-            //   rows="3"
-            // />
           ))}
 
           <div className="buttons">
@@ -255,7 +255,17 @@ export const AddRecipe = () => {
               text="Previous Page"
               onClick={() => changePage("decrease")}
             />
-            <Button text="Next Page" onClick={() => changePage("increase")} />
+            <Button text="Preview" onClick={() => changePage("increase")} />
+          </div>
+        </>
+      )}
+      {page === 3 && (
+        <>
+          <div className="buttons">
+            <Button
+              text="Previous Page"
+              onClick={() => changePage("decrease")}
+            />
           </div>
         </>
       )}

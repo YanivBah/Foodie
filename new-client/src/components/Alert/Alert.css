@@ -1,5 +1,5 @@
 .alert {
-  @apply p-4 rounded shadow-lg mx-auto max-w-sm w-3/4 border absolute top-0 left-1/2 mt-20;
+  @apply p-4 rounded shadow-lg mx-auto max-w-sm w-3/4 border fixed top-0 left-1/2 mt-20;
   transform: translateX(-50%) translateY(-1000px);
   z-index: 9999;
   animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;

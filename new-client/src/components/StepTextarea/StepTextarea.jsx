@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './StepTextarea.css';
 export const StepTextarea = ({ values, onChange, index, maxLength, rows }) => {
-  const [isHidden, setIsHidden] = useState(true);
+  const hiddenOrNot = index > 1 ? true : false;
+  const [isHidden, setIsHidden] = useState(hiddenOrNot);
   const handleHide = () => setIsHidden((prev) => !prev);
 
   const handleChange = (event) => {
@@ -21,9 +22,11 @@ export const StepTextarea = ({ values, onChange, index, maxLength, rows }) => {
       <label className="label" htmlFor={`step${index}`}>
         Step {index + 1}
         <div>
-          <span className="material-icons red" onClick={handleDelete}>
-            clear
-          </span>
+          {index > 1 && (
+            <span className="material-icons red" onClick={handleDelete}>
+              clear
+            </span>
+          )}
           <span className="material-icons blue" onClick={handleHide}>
             {isHidden ? "visibility" : "visibility_off"}
           </span>
