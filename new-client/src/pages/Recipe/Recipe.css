@@ -14,7 +14,7 @@
   @apply object-cover w-full h-64;
 }
 .recipe .meta {
-  @apply my-3 px-3 text-gray-600 flex justify-between items-center;
+  @apply my-3 px-3 text-gray-500 flex justify-between items-center;
 }
 .recipe .meta .user {
   @apply flex items-center;
@@ -24,4 +24,13 @@
 }
 .recipe .meta .user a {
   @apply underline font-medium;
+}
+.recipe .ingredients {
+  @apply px-3;
+}
+.recipe .ingredients h3 {
+  @apply text-xl font-bold text-gray-700;
+}
+.recipe .ingredients h3 + p {
+  @apply text-xs mb-4 text-gray-500;
 }

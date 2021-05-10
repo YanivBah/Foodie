@@ -75,6 +75,7 @@ export const IngredientSetting = ({ ingredient, values, onChange, index }) => {
               <option value="kg">kg</option>
               <option value="ml">ml</option>
               <option value="liters">liters</option>
+              <option value="whole">whole</option>
               <option value="tsp">tsp</option>
               <option value="tbsp">tbsp</option>
               <option value="cup">cups</option>
