@@ -7,7 +7,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [recentRecipes, setRecentRecipes] = useState(null);
   const [alert, setAlert] = useState(null);
-
+  
   const alertPopup = (header, text, type, timeout) => {
     setAlert({header, text, type});
     setTimeout(() => {

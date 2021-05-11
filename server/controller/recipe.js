@@ -110,9 +110,10 @@ const rateRecipe = async (req, res) => {
     }
     recipeOwner.save();
     await req.recipe.save();
+    console.log('test')
     res.status(201).send({message: 'Rating added'});
   } catch(e) {
-    res.status(400).send(e.message);
+    res.status(400).send(e);
   }
 };
 

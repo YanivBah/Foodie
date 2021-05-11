@@ -7,6 +7,7 @@ import { Button } from '../../components/Button/Button';
 import { CommentView } from '../../components/CommentView/CommentView';
 import { IngredientView } from '../../components/IngredientView/IngredientView';
 import { NewComment } from '../../components/NewComment/NewComment';
+import { RateRecipe } from '../../components/RateRecipe/RateRecipe';
 import { StepView } from '../../components/StepView/StepView';
 import Context from "../../Context";
 import './Recipe.css';
@@ -32,7 +33,6 @@ const momentConfig = {
       const { data } = await axios.get(
         `/api/comment/get?id=${recipe.comments}&limit=0&skip=2`
       );
-      console.log(data);
       setComments(data);
     } else {
       const moreComments = await axios.get(
@@ -96,6 +96,11 @@ const momentConfig = {
             </div>
             <p>{getDate()}</p>
           </div>
+          <RateRecipe
+            ratings={recipe.rating}
+            recipeID={recipe._id}
+            setRecipe={setRecipe}
+          />
           <div className="ingredients">
             <h3>Ingredients</h3>
             <p>Click on the number to check the ingredient.</p>
@@ -126,11 +131,13 @@ const momentConfig = {
             {comments.length !== commentsLength && (
               <Button text="Load More" onClick={fetchComments} />
             )}
-            {user.get?.user && (<NewComment
-              setCommentsLength={setCommentsLength}
-              setComments={setComments}
-              recipeID={recipe._id}
-            />)}
+            {user.get?.user && (
+              <NewComment
+                setCommentsLength={setCommentsLength}
+                setComments={setComments}
+                recipeID={recipe._id}
+              />
+            )}
           </div>
         </main>
       )}

@@ -1,0 +1,44 @@
+.rating {
+  @apply px-3 mb-6;
+  /* @apply px-3 mb-6 flex items-center justify-around; */
+}
+.rating h4 {
+  @apply text-lg font-bold text-gray-700;
+}
+.rating .details {
+  @apply flex items-center justify-around;
+}
+.rating p {
+  @apply text-xl text-gray-500;
+}
+.rating .stars {
+  @apply flex flex-row-reverse items-center justify-center;
+}
+.rating .material-icons {
+  /* @apply text-yellow-500; */
+  @apply text-gray-500 cursor-pointer text-2xl;
+}
+.rating .material-icons.checked {
+  @apply text-yellow-500;
+}
+.rating h4 + p {
+  @apply text-sm;
+}
+
+.rating .star1:hover,
+.rating .star2:hover,
+.rating .star2:hover ~ .star1,
+.rating .star3:hover,
+.rating .star3:hover ~ .star2,
+.rating .star3:hover ~ .star1,
+.rating .star4:hover,
+.rating .star4:hover ~ .star3,
+.rating .star4:hover ~ .star2,
+.rating .star4:hover ~ .star1,
+.rating .star5:hover,
+.rating .star5:hover ~ .star4,
+.rating .star5:hover ~ .star3,
+.rating .star5:hover ~ .star2,
+.rating .star5:hover ~ .star1 {
+  @apply text-yellow-500;
+}
