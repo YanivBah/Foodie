@@ -24,6 +24,3 @@
 .profile h2 {
   @apply text-xl font-bold mt-3;
 }
-.profile button {
-  @apply mb-3;
-}

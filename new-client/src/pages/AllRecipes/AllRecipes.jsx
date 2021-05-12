@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../components/Button/Button';
@@ -13,7 +14,7 @@ export const AllRecipes = () => {
     setRecipes((prev) => prev.concat(data.recipes));
     setRecipesLength(data.recipesLength);
   };
-
+  
   useEffect(() => {fetchRecentRecipes()}, []);
 
   return (

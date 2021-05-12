@@ -33,7 +33,26 @@
 }
 
 .navbar--side a {
-  @apply px-2 py-3 border-gray-500 border-b;
+  @apply px-2 py-3 border-gray-500 border-b flex items-center;
+}
+.navbar--side a .material-icons {
+  @apply text-3xl mr-3 rounded-full;
+  padding: 1.5px 3px;
+}
+.material-icons.red {
+  @apply text-white bg-red-500;
+}
+.material-icons.green {
+  @apply text-white bg-green-500;
+}
+.material-icons.blue {
+  @apply text-white bg-blue-500;
+}
+.material-icons.purple {
+  @apply text-white bg-purple-500;
+}
+.material-icons.yellow {
+  @apply text-white bg-yellow-500;
 }
 
 .slide-animation {

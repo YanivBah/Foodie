@@ -17,26 +17,30 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
           arrow_back
         </span>
         <NavLink to="/" onClick={handleMenu}>
+          <span className="material-icons yellow">home</span>
           Home
         </NavLink>
         <NavLink to="/recipes" onClick={handleMenu}>
+          <span className="material-icons purple">restaurant_menu</span>
           Recipes
         </NavLink>
 
         {/* If user not connected */}
         {!user.get && (
           <NavLink to="/login" onClick={handleMenu}>
+            <span className="material-icons green">login</span>
             Login
           </NavLink>
         )}
-
         {/* If user connected */}
         {user.get && (
           <>
             <NavLink to="/add-recipe" onClick={handleMenu}>
+              <span className="material-icons blue">post_add</span>
               Add Recipe
             </NavLink>
             <NavLink to="/logout" onClick={handleMenu}>
+              <span className="material-icons red">logout</span>
               Logout
             </NavLink>
           </>

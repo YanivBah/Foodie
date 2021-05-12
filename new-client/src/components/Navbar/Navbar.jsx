@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SideNavbar } from './SideNavbar';
 import './Navbar.css';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sideNavbar = useRef(null);
+  const history = useHistory();
 
   const handleMenu = () => {
     if (isMenuOpen) {
@@ -19,6 +20,11 @@ export const Navbar = () => {
     }
   }
 
+  const homepageRedirect = () =>{
+    history.push('/');
+    window.scrollTo(0, 0);
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar--left">
@@ -28,9 +34,7 @@ export const Navbar = () => {
       </div>
 
       <div className="navbar--center">
-        <Link to="/">
-          <img src="/assets/logo.png" alt="Our website logo" />
-        </Link>
+          <img src="/assets/logo.png" alt="Our website logo" onClick={homepageRedirect} />
       </div>
 
       <div className="navbar--right">
