@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RecipePreview } from "../../components/RecipePreview/RecipePreview";
+import { RecipeBox } from "../../components/RecipeBox/RecipeBox";
 import React, { useEffect, useState } from 'react'
 import './Homepage.css';
 
@@ -17,7 +17,7 @@ export const Homepage = () => {
     <div className="homepage">
       <div className="recent">
         <h2>Recent Recipes</h2>
-        {recent.map(recipe => <RecipePreview recipe={recipe} key={recipe._id}/>)}
+        {recent.map(recipe => <RecipeBox recipe={recipe} key={recipe._id}/>)}
       </div>
     </div>
   )

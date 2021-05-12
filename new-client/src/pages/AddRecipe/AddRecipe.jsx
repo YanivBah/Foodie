@@ -11,7 +11,7 @@ import axios from 'axios';
 import { IngredientBox } from '../../components/IngredientBox/IngredientBox';
 import { IngredientSetting } from '../../components/IngredientSetting/IngredientSetting';
 import { StepTextarea } from '../../components/StepTextarea/StepTextarea';
-import { PreviewRecipe } from '../../components/PreviewRecipe/PreviewRecipe';
+import { RecipePreview } from "../../components/RecipePreview/RecipePreview";
 import { useHistory } from 'react-router';
 
 export const AddRecipe = () => {
@@ -297,7 +297,7 @@ export const AddRecipe = () => {
             Look how your recipe will look like. <br />
             Check if you need to fix something.
           </p>
-          <PreviewRecipe values={inputValues} />
+          <RecipePreview values={inputValues} />
           <div className="buttons">
             <Button
               text="Previous Page"

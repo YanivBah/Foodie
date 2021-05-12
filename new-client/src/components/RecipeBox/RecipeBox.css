@@ -1,0 +1,22 @@
+.recipe-preview {
+  @apply overflow-hidden mb-2 rounded-lg  border border-gray-200;
+}
+
+.recipe-preview--image {
+  @apply relative;
+}
+.recipe-preview--image img {
+  @apply object-cover w-full h-52;
+}
+.recipe-preview--image .title {
+  @apply absolute bottom-0 px-2 w-full text-gray-800 bg-white bg-opacity-30;
+  backdrop-filter: blur(2px);
+  text-shadow: 1px 0px 5px white;
+}
+.recipe-preview--image .title h3 {
+  @apply text-2xl font-semibold;
+}
+
+.recipe-preview--image .title span {
+  @apply text-sm;
+}

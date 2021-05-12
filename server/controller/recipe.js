@@ -143,11 +143,10 @@ const getRecipe = async (req, res) => {
 const getRecentRecipe = async (req, res) => {
   try {
     const { limit } = req.query;
-    const recipes = await Recipe.find()
+    const recipes = await Recipe.find({}, "_id title owner")
       .sort("-createdAt")
       .limit(parseInt(limit))
-      .populate({ path: "owner", select: "username" })
-      .populate({ path: "ingredients.ingredient" });
+      .populate({ path: "owner", select: "username -_id id" });
     res.status(200).send(recipes);
   } catch (e) {
     res.status(400).send(e);

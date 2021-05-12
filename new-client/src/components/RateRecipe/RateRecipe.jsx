@@ -68,7 +68,6 @@ export const RateRecipe = ({ ratings, recipeID, setRecipe, owner }) => {
   };
 
   const paragraph = () => {
-    console.log('test')
     if (user.get && user.get.user._id === owner) {
       return "Just wait, time make it better.";
     } else if (!user.get) {
