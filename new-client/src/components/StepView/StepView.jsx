@@ -6,7 +6,7 @@ export const StepView = ({instruction, index}) => {
     <div className="step-view">
       <p>
         <span className="number">Step {index + 1}</span>
-        {instruction.description}
+        {instruction.content}
       </p>
     </div>
   );

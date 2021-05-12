@@ -11,10 +11,13 @@ import axios from 'axios';
 import { IngredientBox } from '../../components/IngredientBox/IngredientBox';
 import { IngredientSetting } from '../../components/IngredientSetting/IngredientSetting';
 import { StepTextarea } from '../../components/StepTextarea/StepTextarea';
+import { PreviewRecipe } from '../../components/PreviewRecipe/PreviewRecipe';
+import { useHistory } from 'react-router';
 
 export const AddRecipe = () => {
   const { user, alertPopup } = useContext(Context);
   const [page, setPage] = useState(0);
+  const history = useHistory();
   const [inputValues, setInputValues] = useState({
     title: "",
     description: "",
@@ -123,6 +126,35 @@ export const AddRecipe = () => {
     const newValues = {...inputValues};
     newValues.steps = [...inputValues.steps, { content: "" }];
     setInputValues(newValues);
+  }
+
+  const sendRecipe = async() => {
+    const body = {
+      title: inputValues.title,
+      description: inputValues.description,
+      tags: inputValues.tags,
+      instructions: inputValues.steps,
+      ingredients: [],
+    };
+    inputValues.ingredients.forEach(ingre => {
+      body.ingredients.push({ingredient: ingre._id, amount: ingre.amount, unit: ingre.unit});
+    });
+    console.log(body);
+    const formData = new FormData();
+    formData.append("image", inputValues.file.raw);
+    formData.append("body", JSON.stringify(body));
+    try {
+      const { data } = await axios.post("/api/recipe/add", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${user.get.token}`,
+        },
+      });
+      console.log(data);
+      history.push(`/recipe/${data._id}`);
+    } catch (error) {
+      console.dir(error);
+    }
   }
 
   return (
@@ -261,11 +293,17 @@ export const AddRecipe = () => {
       )}
       {page === 3 && (
         <>
+          <p>
+            Look how your recipe will look like. <br />
+            Check if you need to fix something.
+          </p>
+          <PreviewRecipe values={inputValues} />
           <div className="buttons">
             <Button
               text="Previous Page"
               onClick={() => changePage("decrease")}
             />
+            <Button text="Send" onClick={sendRecipe} />
           </div>
         </>
       )}

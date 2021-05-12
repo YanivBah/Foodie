@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-import React, { Children, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
@@ -45,7 +45,6 @@ const momentConfig = {
   useEffect(() => {
     const fetchRecipe = async() => {
       const { data } = await axios.get(`/api/recipe/get?id=${recipeID}`);
-      console.log(data);
       data.recipe.ingredients.sort((ing1, ing2) => {
         if (ing1.ingredient.name.length < ing2.ingredient.name.length) return -1;
         if (ing1.ingredient.name.length > ing2.ingredient.name.length) return 1;
@@ -100,6 +99,7 @@ const momentConfig = {
             ratings={recipe.rating}
             recipeID={recipe._id}
             setRecipe={setRecipe}
+            owner={recipe.owner._id}
           />
           <div className="ingredients">
             <h3>Ingredients</h3>

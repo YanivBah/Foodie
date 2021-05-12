@@ -32,13 +32,15 @@ const addRecipe = async (req, res) => {
       ...body,
       owner: req.user._id
     });
-
-    if (req.user.permissions.ableToApprove) {
-      const comment = new Comment({ recipe: recipe._id });
-      recipe.comments = comment._id;
-      recipe.isApproved = true;
-      await comment.save();
-    }
+    const comment = new Comment({ recipe: recipe._id });
+    recipe.comments = comment._id;
+    // if (req.user.permissions.ableToApprove) {
+    //   const comment = new Comment({ recipe: recipe._id });
+    //   recipe.comments = comment._id;
+    //   recipe.isApproved = true;
+    //   await comment.save();
+    // }
+    await comment.save();
     await recipe.save();
     res.status(201).send(recipe);
   } catch (e) {
@@ -105,12 +107,11 @@ const rateRecipe = async (req, res) => {
     req.recipe.rating.push({user: req.user._id, rating: req.body.rating});
     const recipeOwner = await User.findById(req.recipe.owner);
     recipeOwner.score += req.body.rating;
-    if (recipeOwner.score >= 100) {
-      recipeOwner.permissions.ableToApprove = true;
-    }
+    // if (recipeOwner.score >= 100) {
+    //   recipeOwner.permissions.ableToApprove = true;
+    // }
     recipeOwner.save();
     await req.recipe.save();
-    console.log('test')
     res.status(201).send({message: 'Rating added'});
   } catch(e) {
     res.status(400).send(e);
@@ -124,14 +125,14 @@ const getRecipe = async (req, res) => {
     await recipe.populate({ path: "ingredients.ingredient" }).execPopulate();
     // await recipe
     //   .populate({
-    //     path: "comments",
-    //     select: "comments",
-    //     options: {limit: 1},
-    //     populate: { path: "comments.user", select: "username -_id" },
-    //   })
-    //   .execPopulate();
+      //     path: "comments",
+      //     select: "comments",
+      //     options: {limit: 1},
+      //     populate: { path: "comments.user", select: "username -_id" },
+      //   })
+      //   .execPopulate();
       await recipe.populate({ path: "owner", select: "username"}).execPopulate();
-    const comments = await Comment.findById(recipe.comments);
+      const comments = await Comment.findById(recipe.comments);
     recipe.image = undefined;
     res.status(200).send({ recipe, commentLength: comments.comments.length });
   } catch (e) {

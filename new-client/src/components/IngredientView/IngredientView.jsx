@@ -9,10 +9,30 @@ export const IngredientView = ({ingredient, index}) => {
   }
   return (
     <div className="ingredient-view">
-      <span className="number" onClick={handleChecking}>{index + 1}</span>
-      <span className={`name${isChecked ? ' checked' : ''}`}>{ingredient.ingredient.name}</span>
-      <span className={`unit${isChecked ? ' checked' : ''}`}> - {ingredient.amount} {ingredient.unit}</span>
-
+      <span className="number" onClick={handleChecking}>
+        {index + 1}
+      </span>
+      {ingredient?.ingredient ? (
+        <>
+          <span className={`name${isChecked ? " checked" : ""}`}>
+            {ingredient.ingredient.name}
+          </span>
+          <span className={`unit${isChecked ? " checked" : ""}`}>
+            {" "}
+            - {ingredient.amount} {ingredient.unit}
+          </span>
+        </>
+      ) : (
+        <>
+          <span className={`name${isChecked ? " checked" : ""}`}>
+            {ingredient.name}
+          </span>
+          <span className={`unit${isChecked ? " checked" : ""}`}>
+            {" "}
+            - {ingredient.amount} {ingredient.unit}
+          </span>
+        </>
+      )}
     </div>
   );
 }

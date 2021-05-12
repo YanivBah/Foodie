@@ -36,20 +36,20 @@ const userSchema = new mongoose.Schema(
       // default: false,
       default: true
     },
-    permissions: {
-      ableToComment: {
-        type: Boolean,
-        default: true
-      },
-      ableToApprove: {
-        type: Boolean,
-        default: false
-      },
-      ableToBan: {
-        type: Boolean,
-        default: false
-      }
-    },
+    // permissions: {
+    //   ableToComment: {
+    //     type: Boolean,
+    //     default: true
+    //   },
+    //   ableToApprove: {
+    //     type: Boolean,
+    //     default: false
+    //   },
+    //   ableToBan: {
+    //     type: Boolean,
+    //     default: false
+    //   }
+    // },
     tokens: [
       {
         token: {
@@ -96,7 +96,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
 userSchema.methods.generateAuthToken = async function() {
   const user = this;
-  const token = jwt.sign({_id: user._id.toString() }, 'SecretKEYtoJWT', { expiresIn: '7 days' });
+  const token = jwt.sign({_id: user._id.toString() }, 'SecretKEYtoJWT', { expiresIn: '1 day' });
   user.tokens = user.tokens.concat({token});
   await user.save();
   return token;

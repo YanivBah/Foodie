@@ -35,7 +35,8 @@ const RecipeSchema = new mongoose.Schema(
     ],
     isApproved: {
       type: Boolean,
-      default: false,
+      // default: false,
+      default: true,
     },
     image: {
       type: Buffer,

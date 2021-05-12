@@ -6,7 +6,6 @@ export const ImageUploadPlusPreview = ({name, values, onChange, whatToChange}) =
       const newValue = { ...values };
       newValue[whatToChange].raw = event.target.files[0];
       newValue[whatToChange].preview = URL.createObjectURL(event.target.files[0]);
-      console.log(newValue);
       onChange(newValue);
     }
   }
