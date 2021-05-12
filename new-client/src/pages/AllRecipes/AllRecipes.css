@@ -1,0 +1,6 @@
+.all-recipes {
+  @apply pt-28 px-4 text-gray-700;
+}
+.all-recipes h2 {
+  @apply text-xl font-bold mt-3 text-gray-700;
+}

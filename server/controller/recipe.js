@@ -142,13 +142,14 @@ const getRecipe = async (req, res) => {
 
 const getRecentRecipe = async (req, res) => {
   try {
-    const { limit } = req.query;
+    const { limit, skip } = req.query;
     const recipes = await Recipe.find({}, "_id title owner")
       .sort("-createdAt")
       .limit(parseInt(limit))
-      .skip(0)
+      .skip(parseInt(skip))
       .populate({ path: "owner", select: "username -_id id" });
-    res.status(200).send(recipes);
+    const recipesLength = await Recipe.countDocuments({});
+    res.status(200).send({ recipes, recipesLength });
   } catch (e) {
     res.status(400).send(e);
   }

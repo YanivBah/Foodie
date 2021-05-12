@@ -7,44 +7,48 @@ import { Recipe } from './pages/Recipe/Recipe'
 import { Profile } from './pages/Profile/Profile'
 import { Navbar } from './components/Navbar/Navbar'
 import { AddRecipe } from './pages/AddRecipe/AddRecipe'
+import { AllRecipes } from './pages/AllRecipes/AllRecipes'
 
 export const Routes = () => {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <Switch>
-
         {/* Homepage */}
         <Route path="/" exact>
-          <Homepage/>
+          <Homepage />
         </Route>
 
         {/* Login */}
         <Route path="/login" exact>
-          <Login/>
+          <Login />
         </Route>
 
         {/* Signup */}
         <Route path="/signup" exact>
-          <Signup/>
+          <Signup />
         </Route>
 
         {/* Recipe */}
         <Route path="/recipe/:recipeID" exact>
-          <Recipe/>
+          <Recipe />
         </Route>
 
-        {/* Recipe */}
+        {/* All Recipes */}
+        <Route path="/recipes" exact>
+          <AllRecipes />
+        </Route>
+
+        {/* Add New Recipe */}
         <Route path="/add-recipe/" exact>
-          <AddRecipe/>
+          <AddRecipe />
         </Route>
 
-        {/* Profile */}
+        {/* User Profile */}
         <Route path="/profile/:username" exact>
-          <Profile/>
+          <Profile />
         </Route>
-
       </Switch>
     </Router>
-  )
+  );
 }

@@ -7,8 +7,8 @@ export const Homepage = () => {
   const [recent, setRecent] = useState([]);
 
   const fetchRecentRecipes = async() => {
-    const {data} = await axios.get("/api/recipe/recent?limit=5");
-    setRecent(data);
+    const {data} = await axios.get("/api/recipe/recent?limit=5&skip=0");
+    setRecent(data.recipes);
   }
 
   useEffect(() => {fetchRecentRecipes()}, []);

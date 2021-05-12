@@ -19,6 +19,9 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
         <NavLink to="/" onClick={handleMenu}>
           Home
         </NavLink>
+        <NavLink to="/recipes" onClick={handleMenu}>
+          Recipes
+        </NavLink>
 
         {/* If user not connected */}
         {!user.get && (
@@ -26,7 +29,7 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
             Login
           </NavLink>
         )}
-        
+
         {/* If user connected */}
         {user.get && (
           <>

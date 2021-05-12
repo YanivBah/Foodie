@@ -1,3 +1,6 @@
 .homepage {
   @apply pt-28 px-4;
 }
+.homepage .recent h2 {
+  @apply text-xl font-bold mt-3 text-gray-700;
+}
