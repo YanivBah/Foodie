@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { SideNavbar } from './SideNavbar';
 import './Navbar.css';
 
