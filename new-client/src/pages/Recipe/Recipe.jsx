@@ -90,7 +90,7 @@ const momentConfig = {
                 alt="Literally avatar"
               />
               <span>
-                By <Link to="/">{recipe.owner.username}</Link>
+                By <Link to={`/profile/${recipe.owner.username}`}>{recipe.owner.username}</Link>
               </span>
             </div>
             <p>{getDate()}</p>

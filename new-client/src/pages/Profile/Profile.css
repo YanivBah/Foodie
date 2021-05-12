@@ -1,0 +1,29 @@
+.profile {
+  @apply pt-28 px-4 text-gray-700;
+}
+
+.profile .head {
+  @apply flex items-center justify-center;
+}
+.profile .head h1 {
+  @apply text-2xl;
+}
+.profile .head h1 + p {
+  @apply text-base;
+}
+.profile .head img {
+  @apply w-28 mr-3 rounded-full;
+}
+.profile .score {
+  @apply text-center block bg-gray-200 mt-2 py-2 rounded-md font-semibold text-lg;
+}
+.profile .score span {
+  @apply font-extralight;
+}
+
+.profile h2 {
+  @apply text-xl font-bold mt-3;
+}
+.profile button {
+  @apply mb-3;
+}

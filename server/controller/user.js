@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const Recipe = require("../model/recipe");
 
 const loginUser = async (req,res) => {
   try {
@@ -71,10 +72,14 @@ const getUser = async (req, res) => {
 const getUserRecipes = async (req, res) => {
   try {
     const { id, limit, skip } = req.query;
-    const user = await User.findById(id);
-    await user.populate({ path: "recipes", limit: parseInt(limit), skip: parseInt(skip)}).execPopulate();
-
-    res.status(200).send(user.recipes);
+    // const user = await User.findById(id);
+    // await user.populate({ path: "recipes", limit: parseInt(limit), skip: parseInt(skip)}).execPopulate();
+    const recipes = await Recipe.find({owner: id}, "_id title owner")
+      .sort("-createdAt")
+      .limit(parseInt(limit))
+      .skip(parseInt(skip));
+    const recipesLength = await Recipe.find({owner: id});
+    res.status(200).send({ recipes, recipesLength: recipesLength.length });
   } catch(e) {
     res.status(400).send(e);
   }

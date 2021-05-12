@@ -146,6 +146,7 @@ const getRecentRecipe = async (req, res) => {
     const recipes = await Recipe.find({}, "_id title owner")
       .sort("-createdAt")
       .limit(parseInt(limit))
+      .skip(0)
       .populate({ path: "owner", select: "username -_id id" });
     res.status(200).send(recipes);
   } catch (e) {
