@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import './Homepage.css';
 import { useHistory } from 'react-router';
 import { Button } from '../../components/Button/Button';
+import { Hero } from '../../components/Hero/Hero';
 
 export const Homepage = () => {
   const [recent, setRecent] = useState([]);
@@ -17,6 +18,7 @@ export const Homepage = () => {
 
   return (
     <div className="homepage">
+      <Hero/>
       <div className="recent">
         <h2>Recent Recipes</h2>
         {recent.map(recipe => <RecipeBox recipe={recipe} key={recipe._id}/>)}

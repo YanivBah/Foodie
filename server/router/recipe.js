@@ -13,6 +13,7 @@ const {
   getRecipe,
   getRecentRecipe,
   getRecipeImage,
+  searchRecipesByIngredient,
 } = require("../controller/recipe");
 
 router.post("/api/recipe/add", auth, upload.single("image"), addRecipe);
@@ -23,6 +24,7 @@ router.patch("/api/recipe/edit", auth, recipe, editRecipe);
 router.get("/api/recipe/get", getRecipe);
 router.get("/api/recipe/image", getRecipeImage);
 router.get("/api/recipe/recent", getRecentRecipe);
+router.get("/api/recipe/searchIngredient", searchRecipesByIngredient);
 
 // router.get('/imageserving/:id', async (req, res) => {
 //   try {

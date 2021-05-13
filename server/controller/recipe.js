@@ -167,6 +167,16 @@ const getRecipeImage = async (req, res) => {
   }
 }
 
+const searchRecipesByIngredient = async (req, res) => {
+  try {
+    const {ingredients} = req.body;
+    const recipes = await Recipe.find({"ingredients.ingredient": {$all: ingredients}}, "_id title owner");
+    res.send(recipes);
+  } catch (e) {
+    res.status(404).send();
+  }
+}
+
 module.exports = {
   addRecipe,
   deleteRecipe,
@@ -176,4 +186,5 @@ module.exports = {
   getRecipe,
   getRecentRecipe,
   getRecipeImage,
+  searchRecipesByIngredient,
 };

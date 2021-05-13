@@ -1,0 +1,40 @@
+.hero {
+  @apply relative block text-gray-700;
+  height: 30vh;
+}
+.hero-bg {
+  @apply absolute top-0 left-0 w-full h-full overflow-hidden;
+  background: linear-gradient(90deg, #1957db, #487bea);
+  transform-origin: 0px 0px;
+  transform: skewY(-7deg);
+  z-index: -1;
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    transform: skewY(-4deg);
+  }
+}
+
+.hero-content {
+  @apply text-center px-3 py-9;
+  margin: 0 auto;
+}
+.hero-text {
+  @apply text-left mt-2 md:ml-5;
+}
+
+.hero-text h1 {
+  @apply text-gray-100 text-2xl font-semibold md:text-4xl;
+}
+.hero-text ul {
+  @apply text-sm list-disc px-4 text-gray-100;
+}
+.hero-text p {
+  @apply text-white text-base;
+}
+.hero-image {
+  @apply absolute bottom-0 right-0;
+}
+.hero-image img {
+  @apply h-40 sm:h-64;
+}
