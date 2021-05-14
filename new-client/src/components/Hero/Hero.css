@@ -2,6 +2,7 @@
   @apply relative block text-gray-700;
   height: 30vh;
 }
+
 .hero-bg {
   @apply absolute top-0 left-0 w-full h-full overflow-hidden;
   background: linear-gradient(90deg, #1957db, #487bea);
@@ -11,13 +12,16 @@
 }
 
 @media (min-width: 768px) {
+  .hero {
+    height: 40vh;
+  }
   .hero-bg {
     transform: skewY(-4deg);
   }
 }
 
 .hero-content {
-  @apply text-center px-3 py-9;
+  @apply text-center px-3 py-14 sm:py-16 md:py-24;
   margin: 0 auto;
 }
 
@@ -26,13 +30,13 @@
 }
 
 .hero-text h1 {
-  @apply text-gray-100 text-2xl font-semibold md:text-4xl;
+  @apply text-gray-100 text-2xl font-semibold sm:text-4xl md:text-6xl;
 }
 .hero-text h1 + p {
-  @apply text-xs mb-2 text-gray-300 text-opacity-80;
+  @apply text-xs mb-2 md:ml-5 text-opacity-80;
 }
 .hero-text ul {
-  @apply text-sm list-disc px-4 text-gray-100;
+  @apply text-sm list-disc px-4 text-gray-100 sm:text-lg;
 }
 
 .hero-text p {
@@ -44,5 +48,5 @@
 }
 
 .hero-image img {
-  @apply h-40 sm:h-64;
+  @apply h-36 sm:h-52 md:h-64 lg:h-72;
 }

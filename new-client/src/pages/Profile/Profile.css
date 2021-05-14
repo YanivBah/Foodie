@@ -1,5 +1,5 @@
 .profile {
-  @apply pt-28 px-4 text-gray-700 relative;
+  @apply pt-28 px-4 text-gray-700 relative md:pt-36 lg:pt-44 sm:px-8 md:px-20;
 }
 .profile .dashboard-link {
   @apply rounded px-3 border-b-4 border-l-2 shadow-lg bg-red-500 border-red-600 text-white;

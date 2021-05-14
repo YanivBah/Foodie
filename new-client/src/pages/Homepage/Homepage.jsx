@@ -10,7 +10,7 @@ export const Homepage = () => {
   const [recent, setRecent] = useState([]);
   const history = useHistory();
   const fetchRecentRecipes = async() => {
-    const {data} = await axios.get("/api/recipe/recent?limit=5&skip=0");
+    const {data} = await axios.get("/api/recipe/recent?limit=6&skip=0");
     setRecent(data.recipes);
   }
 
@@ -21,7 +21,9 @@ export const Homepage = () => {
       <Hero/>
       <div className="recent">
         <h2>Recent Recipes</h2>
-        {recent.map(recipe => <RecipeBox recipe={recipe} key={recipe._id}/>)}
+        <div className="grid-preview">
+          {recent.map(recipe => <RecipeBox recipe={recipe} key={recipe._id}/>)}
+        </div>
         <Button text="See All" onClick={() => history.push('/recipes')}/>
       </div>
     </div>

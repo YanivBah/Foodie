@@ -1,6 +1,9 @@
 .homepage {
-  @apply pt-20 px-4;
+  @apply pt-20 px-4 sm:pt-24 md:pt-28 lg:mx-auto;
 }
 .homepage .recent h2 {
-  @apply text-xl font-bold mt-3 text-gray-700;
+  @apply text-xl font-bold mt-3 text-gray-700 sm:mt-6 sm:text-2xl;
+}
+.grid-preview {
+  @apply md:grid md:grid-cols-2 md:gap-3 lg:grid-cols-3;
 }

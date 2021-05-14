@@ -21,6 +21,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "heroku-deploy": "npm run build && mv build ../server && cd ../server && git add . && git commit -am 'heroku deploy' &&  git push heroku master",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

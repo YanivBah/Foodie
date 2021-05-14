@@ -51,7 +51,9 @@ export const Profile = () => {
           )}
           <div className="head">
             <img
-              src={`/api/user/avatar?username=${profile.username}&v=${Date.now()}`}
+              src={`/api/user/avatar?username=${
+                profile.username
+              }&v=${Date.now()}`}
               alt=""
             />
             <div>
@@ -63,7 +65,7 @@ export const Profile = () => {
             Score: <span>{profile.score}</span>
           </p>
           <h2>{profile.username}'s recipes</h2>
-          <div className="recipes-container">
+          <div className="grid-preview">
             {recipes.map((recipe) => (
               <RecipeBox recipe={recipe} key={recipe._id} noName={true} />
             ))}

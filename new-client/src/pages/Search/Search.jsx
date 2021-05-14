@@ -300,13 +300,15 @@ export const Search = () => {
           {recipes.length > 0 && (
             <>
               <h2>{maxRecipes} recipes founded.</h2>
-              {recipes.map((recipe, index) => (
-                <RecipeBox recipe={recipe} key={index} noName={true} />
-              ))}
+              <div className="grid-preview">
+                {recipes.map((recipe, index) => (
+                  <RecipeBox recipe={recipe} key={index} noName={true} />
+                ))}
+              </div>
             </>
           )}
           {maxRecipes !== 0 && maxRecipes > recipes.length && (
-            <Button text="Load More" onClick={() => handleSearch('more')} />
+            <Button text="Load More" onClick={() => handleSearch("more")} />
           )}
         </>
       )}

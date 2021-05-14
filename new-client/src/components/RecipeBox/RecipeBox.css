@@ -14,7 +14,7 @@
   text-shadow: 1px 0px 5px white;
 }
 .recipe-preview--image .title h3 {
-  @apply text-2xl font-semibold;
+  @apply text-2xl font-semibold md:text-xl;
 }
 
 .recipe-preview--image .title span {

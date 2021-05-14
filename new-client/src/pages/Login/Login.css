@@ -1,5 +1,5 @@
 .login {
-  @apply pt-28 px-4;
+  @apply pt-28 px-4 md:pt-36 lg:pt-44 sm:px-8 md:px-20;
 }
 .login .header {
   @apply text-center mb-5;
