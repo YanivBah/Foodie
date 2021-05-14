@@ -86,11 +86,14 @@ const momentConfig = {
           <div className="meta">
             <div className="user">
               <img
-                src="https://yt3.ggpht.com/ytc/AAUvwngw35YY8vYI86RTOoEGafSxEjghjzTcKw3LbMyZ=s900-c-k-c0x00ffffff-no-rj"
+                src={`/api/user/avatar?username=${recipe.owner.username}`}
                 alt="Literally avatar"
               />
               <span>
-                By <Link to={`/profile/${recipe.owner.username}`}>{recipe.owner.username}</Link>
+                By{" "}
+                <Link to={`/profile/${recipe.owner.username}`}>
+                  {recipe.owner.username}
+                </Link>
               </span>
             </div>
             <p>{getDate()}</p>

@@ -5,8 +5,14 @@ const userRouter = require("./router/user");
 const recipeRouter = require("./router/recipe");
 const commentRouter = require("./router/comment");
 const ingredientRouter = require("./router/ingredient");
+require("dotenv").config();
 
-mongoose.connect("mongodb://localhost:27017/recipes", {
+// mongoose.connect("mongodb://localhost:27017/recipes", {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useUnifiedTopology: true,
+// });
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,

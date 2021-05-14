@@ -8,6 +8,7 @@ import { Profile } from './pages/Profile/Profile'
 import { Navbar } from './components/Navbar/Navbar'
 import { AddRecipe } from './pages/AddRecipe/AddRecipe'
 import { AllRecipes } from './pages/AllRecipes/AllRecipes'
+import { Search } from './pages/Search/Search'
 
 export const Routes = () => {
   return (
@@ -48,6 +49,13 @@ export const Routes = () => {
         <Route path="/profile/:username" exact>
           <Profile />
         </Route>
+
+        {/* Search */}
+        <Route path="/search" exact>
+          <Search />
+        </Route>
+
+
       </Switch>
     </Router>
   );

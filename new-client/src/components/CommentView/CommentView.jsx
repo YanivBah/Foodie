@@ -75,7 +75,7 @@ export const CommentView = ({ comment, setComments, setCommentsLength }) => {
   return (
     <div className="comment">
       <img
-        src="https://yt3.ggpht.com/ytc/AAUvwngw35YY8vYI86RTOoEGafSxEjghjzTcKw3LbMyZ=s900-c-k-c0x00ffffff-no-rj"
+        src={`/api/user/avatar?username=${comment.user.username}`}
         alt="Literally avatar"
       />
       <div className="details">

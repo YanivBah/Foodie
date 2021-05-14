@@ -1,5 +1,8 @@
 const User = require("../model/user");
 const Recipe = require("../model/recipe");
+const sharp = require("sharp");
+const fs = require("fs").promises;
+const path = require("path");
 
 const loginUser = async (req,res) => {
   try {
@@ -25,7 +28,15 @@ const activeUser = async (req, res) => {
 
 const signupUser = async (req,res) => {
   try {
-    const user = new User(req.body);
+    const body = JSON.parse(req.body.body);
+    if (req.file) {
+      const buffer = await sharp(req.file.buffer)
+        .resize({ width: 600 })
+        .jpeg({ quality: 90 })
+        .toBuffer();
+      body.avatar = buffer;
+    }
+    const user = new User(body);
     await user.save();
     res.status(201).send(user.toPublicJSON());
   } catch(e) {
@@ -57,7 +68,6 @@ const deleteUser = async (req,res) => {
 const getUser = async (req, res) => {
   try {
     const {username, id} = req.query;
-    let user;
     if (username) user = await User.findOne({username});
     else if (id) user = await User.findById(id);
     else throw ('wrong queries');
@@ -83,6 +93,25 @@ const getUserRecipes = async (req, res) => {
   }
 }
 
+const getUserAvatar = async (req, res) => {
+  try {
+    const { username } = req.query;
+    const user = await User.findOne({ username });
+    if (!user.avatar) {
+      user.avatar = await getDefaultAvatar();
+    }
+    res.set("Content-Type", "image/jpg");
+    res.send(user.avatar);
+  } catch (e) {
+    res.status(404).send();
+  }
+};
+
+const getDefaultAvatar = async() => {
+  const avatar = await fs.readFile(path.join(__dirname, "./userDefaultAvatar.jpg"));
+  return avatar;
+}
+
 module.exports = {
   loginUser,
   signupUser,
@@ -91,4 +120,5 @@ module.exports = {
   activeUser,
   getUser,
   getUserRecipes,
+  getUserAvatar,
 };

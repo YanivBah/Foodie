@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SideNavbar } from './SideNavbar';
 import './Navbar.css';
 
@@ -34,13 +34,21 @@ export const Navbar = () => {
       </div>
 
       <div className="navbar--center">
-          <img src="/assets/logo.png" alt="Our website logo" onClick={homepageRedirect} />
+        <img
+          src="/assets/logo.png"
+          alt="Our website logo"
+          onClick={homepageRedirect}
+        />
       </div>
 
       <div className="navbar--right">
-        <span className="material-icons">search</span>
+        <Link to="Search">
+          <span className="material-icons">search</span>
+        </Link>
       </div>
-      {isMenuOpen && <SideNavbar sideNavbar={sideNavbar} handleMenu={handleMenu} />}
+      {isMenuOpen && (
+        <SideNavbar sideNavbar={sideNavbar} handleMenu={handleMenu} />
+      )}
     </nav>
   );
 }

@@ -1,0 +1,32 @@
+.search {
+  @apply pt-28 px-4;
+}
+.search .basic {
+  @apply grid grid-cols-2 gap-4;
+}
+.search .ingredients-selected {
+  @apply flex mb-2 items-center;
+}
+.search .ingredients-selected h3 {
+  @apply font-semibold text-lg text-gray-700;
+}
+.search .ingredients-selected .selected {
+  @apply flex items-center px-2 bg-gray-700 text-white rounded-full mx-1;
+}
+
+.search .header {
+  @apply text-center mb-5;
+}
+
+.search .header h1 {
+  @apply text-xl font-semibold;
+}
+.search .header p {
+  @apply font-light;
+}
+.search .header p span {
+  @apply font-medium cursor-pointer;
+}
+.search h2 {
+  @apply uppercase text-center text-lg mb-3;
+}

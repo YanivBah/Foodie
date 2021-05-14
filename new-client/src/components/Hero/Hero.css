@@ -9,6 +9,7 @@
   transform: skewY(-7deg);
   z-index: -1;
 }
+
 @media (min-width: 768px) {
   .hero-bg {
     transform: skewY(-4deg);
@@ -19,6 +20,7 @@
   @apply text-center px-3 py-9;
   margin: 0 auto;
 }
+
 .hero-text {
   @apply text-left mt-2 md:ml-5;
 }
@@ -26,15 +28,21 @@
 .hero-text h1 {
   @apply text-gray-100 text-2xl font-semibold md:text-4xl;
 }
+.hero-text h1 + p {
+  @apply text-xs mb-2 text-gray-300 text-opacity-80;
+}
 .hero-text ul {
   @apply text-sm list-disc px-4 text-gray-100;
 }
+
 .hero-text p {
   @apply text-white text-base;
 }
+
 .hero-image {
   @apply absolute bottom-0 right-0;
 }
+
 .hero-image img {
   @apply h-40 sm:h-64;
 }

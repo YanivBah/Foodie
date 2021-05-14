@@ -3,14 +3,18 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const uniqueValidator = require("mongoose-unique-validator");
 const Recipe = require("./recipe");
-
+const validator = require("validator");
 const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
       required: true,
       unique: true,
-      // match: [/regex/, "invalid characters"],
+      validate(value) {
+        if (/\W/g.test(value)) {
+          throw new Error(`You can't use spaces or symbols`);
+        }
+      }
     },
     email: {
       type: String,
@@ -18,14 +22,23 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       uniqueCaseInsensitive: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error(`This is invalid email.`);
+        }
+      }
     },
     password: {
       type: String,
       required: true,
+      validate(value) {
+        if (!validator.isStrongPassword(value, {minLength: 8, minLowercase: 1, minUppercase: 1, minSymbols: 1})) {
+          throw new Error(`You need password with atleast 8 characters, 1 lowercase, 1 uppercase and 1 symbol`);
+        }
+      }
     },
     avatar: {
       type: Buffer,
-      default: null,
     },
     score: {
       type: Number,

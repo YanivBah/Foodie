@@ -139,7 +139,6 @@ export const AddRecipe = () => {
     inputValues.ingredients.forEach(ingre => {
       body.ingredients.push({ingredient: ingre._id, amount: ingre.amount, unit: ingre.unit});
     });
-    console.log(body);
     const formData = new FormData();
     formData.append("image", inputValues.file.raw);
     formData.append("body", JSON.stringify(body));
@@ -150,7 +149,6 @@ export const AddRecipe = () => {
           "Authorization": `Bearer ${user.get.token}`,
         },
       });
-      console.log(data);
       history.push(`/recipe/${data._id}`);
     } catch (error) {
       console.dir(error);
@@ -173,6 +171,7 @@ export const AddRecipe = () => {
             values={inputValues}
             whatToChange={"file"}
             onChange={setInputValues}
+            text="Upload an image"
           />
           <Input
             name="title"
@@ -277,7 +276,7 @@ export const AddRecipe = () => {
               values={inputValues}
               onChange={setInputValues}
               index={index}
-              maxLength="600"
+              maxLength="1200"
               rows="3"
             />
           ))}

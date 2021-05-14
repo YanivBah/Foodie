@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 import Context from "../../Context";
+import validator from 'validator';
 import './Signup.css';
+import { ImageUploadPlusPreview } from '../../components/ImageUploadPlusPreview/ImageUploadPlusPreview';
 
 export const Signup = () => {
   const { alertPopup } = useContext(Context);
@@ -15,24 +17,48 @@ export const Signup = () => {
     username: "",
     email: "",
     password: "",
-    repeatPassword: ""
+    repeatPassword: "",
+    file: {
+      raw: null,
+      preview: null
+    }
   });
 
   const handleSignup = async (event) => {
     event.preventDefault();
     if (inputValues.username === '' || inputValues.email === '' || inputValues.password === '') {
-      return alertPopup("Empty field/s", "You have one or more empty fields.", "red", 2500);
+      return alertPopup("Empty field/s", "You have one or more empty fields.", "red", 3500);
+    }
+    if (/\W/g.test(inputValues.username)) {
+      return alertPopup("Username", "The username can't include spaces or symbols.", "red", 3000);
+    }
+    if (!validator.isEmail(inputValues.email)) {
+      return alertPopup("Email", "The email is invalid.", "red", 3000);
     }
     if (inputValues.password !== inputValues.repeatPassword) {
-      return alertPopup("Password", "The password fields are not matching.", "red", 2000);
+      return alertPopup("Password", "The password fields are not matching.", "red", 3000);
+    }
+    if (!validator.isStrongPassword(inputValues.password, {minLength: 8, minLowercase: 1, minUppercase: 1, minSymbols: 1})) {
+      return alertPopup(
+        "Password",
+        "The password must be with atleast: 8 Characters, 1 Lowercase, 1 Uppercase and 1 Symbol.",
+        "red",
+        5000
+      );
     }
     const body = {
       email: inputValues.email,
       username: inputValues.username,
       password: inputValues.password
     };
+    const formData = new FormData();
+    if (inputValues.file.raw) {
+      formData.append("image", inputValues.file.raw);
+    }
+    formData.append("body", JSON.stringify(body));
     try {
-      await axios.post('/api/user/signup', body);
+      await axios.post("/api/user/signup", formData, {headers: {"Content-Type": "multipart/form-data"},});
+      // await axios.post('/api/user/signup', body);
       alertPopup("Success!", "Signup was successful!", "green", 2000);
       history.push('/login');
     } catch (error) {
@@ -49,6 +75,13 @@ export const Signup = () => {
         </p>
       </div>
       <form>
+        <ImageUploadPlusPreview
+          name="fileupload"
+          values={inputValues}
+          whatToChange="file"
+          onChange={setInputValues}
+          text="Upload an avatar"
+        />
         <Input
           name="username"
           label="Username"

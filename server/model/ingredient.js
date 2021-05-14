@@ -46,6 +46,7 @@ const Ingredient = mongoose.model("Ingredient", ingredientSchema);
 //   });
 //   try {
 //     Ingredient.insertMany(dataArray);
+//     console.log('finished');
 //   } catch (e) {
 //     console.log(e);
 //   }

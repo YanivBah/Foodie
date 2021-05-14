@@ -20,7 +20,7 @@
   @apply flex items-center;
 }
 .recipe .meta .user img {
-  @apply w-12 mr-3;
+  @apply w-12 h-12 mr-3 rounded-full;
 }
 .recipe .meta .user a {
   @apply underline font-medium;

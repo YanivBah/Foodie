@@ -2,7 +2,7 @@
   @apply flex mb-2;
 }
 .comment img {
-  @apply w-12 h-12 mr-3;
+  @apply w-12 h-12 mr-3 rounded-full;
 }
 .comment .details {
   @apply border rounded-md w-full;

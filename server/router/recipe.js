@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const auth = require("../middleware/auth");
 const recipe = require("../middleware/recipe");
-const upload = require("../middleware/imageUploadForRecipe");
+const upload = require("../middleware/imageUpload");
 
 const {
   addRecipe,
@@ -13,7 +13,7 @@ const {
   getRecipe,
   getRecentRecipe,
   getRecipeImage,
-  searchRecipesByIngredient,
+  searchRecipes,
 } = require("../controller/recipe");
 
 router.post("/api/recipe/add", auth, upload.single("image"), addRecipe);
@@ -24,15 +24,6 @@ router.patch("/api/recipe/edit", auth, recipe, editRecipe);
 router.get("/api/recipe/get", getRecipe);
 router.get("/api/recipe/image", getRecipeImage);
 router.get("/api/recipe/recent", getRecentRecipe);
-router.get("/api/recipe/searchIngredient", searchRecipesByIngredient);
+router.get("/api/recipe/searchIngredient", searchRecipes);
 
-// router.get('/imageserving/:id', async (req, res) => {
-//   try {
-//     const user = await User.findBYId(req.params.id)
-//     res.set('Content-Type', 'image/jpeg');
-//     res.send(user.avatar);
-//   } catch (e) {
-//     res.status(400).send()
-//   }
-// })
 module.exports = router;

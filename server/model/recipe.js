@@ -15,6 +15,12 @@ const RecipeSchema = new mongoose.Schema(
     tags: {
       type: [String],
       default: [],
+      lowercase: true,
+      validate(value) {
+        if (value.length > 3) {
+          throw new Error('You can 3 tags maximum');
+        }
+      }
     },
     rating: {
       type: Number,
@@ -40,7 +46,7 @@ const RecipeSchema = new mongoose.Schema(
     },
     image: {
       type: Buffer,
-      default: null,
+      required: true,
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -67,7 +73,7 @@ const RecipeSchema = new mongoose.Schema(
           ref: "Ingredient",
         },
         amount: {
-          type: Number,
+          type: String,
           required: true,
         },
         unit: {

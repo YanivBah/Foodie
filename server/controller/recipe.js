@@ -22,8 +22,8 @@ const User = require("../model/user");
 const addRecipe = async (req, res) => {
   try {
     const buffer = await sharp(req.file.buffer)
-      .resize({width: 500})
-      .jpeg({quality: 80})
+      .resize({width: 800})
+      .jpeg({quality: 95})
       .toBuffer();
     const body = JSON.parse(req.body.body);
     body.ingredients.forEach(ing => ing.amount = parseInt(ing.amount));
@@ -167,11 +167,26 @@ const getRecipeImage = async (req, res) => {
   }
 }
 
-const searchRecipesByIngredient = async (req, res) => {
+const searchRecipes = async (req, res) => {
   try {
-    const {ingredients} = req.body;
-    const recipes = await Recipe.find({"ingredients.ingredient": {$all: ingredients}}, "_id title owner");
-    res.send(recipes);
+    const { ingredients, tags, title, limit, skip } = req.query;
+    let searchParams = {};
+    if (ingredients) {
+      searchParams = { ...searchParams, "ingredients.ingredient": {$all: ingredients}}; 
+    } if (tags) {
+      const tagsLowercase = []
+      tags.forEach((tag) => tagsLowercase.push(tag.toLowerCase()));
+      searchParams = { ...searchParams, tags: { $in: tagsLowercase  } };
+    } if (title) {
+      const regex = new RegExp(title, 'i');
+      searchParams = {...searchParams, title: {$regex: regex}};
+    }
+
+    const recipesLength = await Recipe.find(searchParams, "_id title owner");
+    const recipes = await Recipe.find(searchParams, "_id title owner")
+      .limit(parseInt(limit))
+      .skip(parseInt(skip));
+    res.send({ recipes, recipesLength: recipesLength.length});
   } catch (e) {
     res.status(404).send();
   }
@@ -186,5 +201,5 @@ module.exports = {
   getRecipe,
   getRecentRecipe,
   getRecipeImage,
-  searchRecipesByIngredient,
+  searchRecipes,
 };

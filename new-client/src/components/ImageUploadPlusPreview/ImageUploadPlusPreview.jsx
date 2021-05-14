@@ -1,6 +1,6 @@
 import React from 'react';
 import './ImageUploadPlusPreview.css';
-export const ImageUploadPlusPreview = ({name, values, onChange, whatToChange}) => {
+export const ImageUploadPlusPreview = ({name, values, onChange, whatToChange, text, type}) => {
   const handleChange = (event) => {
     if (event.target.files.length) {
       const newValue = { ...values };
@@ -26,7 +26,7 @@ export const ImageUploadPlusPreview = ({name, values, onChange, whatToChange}) =
         className="inputfile"
       />
       <label htmlFor={name}>
-        {!values.file.raw ? "Upload an image" : "Upload different"}
+        {!values.file.raw ? text : "Upload different"}
       </label>
     </>
   );
