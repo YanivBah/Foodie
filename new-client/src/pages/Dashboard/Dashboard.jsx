@@ -23,10 +23,11 @@ export const Dashboard = () => {
         newRepeatPassword: "",
         file: {
           raw: null,
-          preview: `/api/user/avatar?username=${user.get.user.username}`,
+          preview: `/api/user/avatar?username=${user.get.user.username}&v=${Date.now()}`,
         },
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleUpdate = async(e) => {
@@ -94,6 +95,14 @@ export const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      <div className="header">
+        <h1>Dashboard</h1>
+        <p>
+          Change your user data how you like.
+          <br />
+          All updates must include your <span>old password</span>.
+        </p>
+      </div>
       {values && (
         <form>
           <ImageUploadPlusPreview

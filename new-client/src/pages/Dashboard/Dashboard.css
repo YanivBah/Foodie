@@ -1,3 +1,16 @@
 .dashboard {
   @apply pt-28 px-4 text-gray-700 relative;
 }
+.dashboard .header {
+  @apply text-center mb-5;
+}
+
+.dashboard .header h1 {
+  @apply text-xl font-semibold;
+}
+.dashboard .header p {
+  @apply font-light;
+}
+.dashboard .header p span {
+  @apply font-semibold;
+}

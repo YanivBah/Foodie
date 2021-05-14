@@ -1,14 +1,25 @@
+import axios from 'axios';
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
 import Context from "../../Context";
 export const SideNavbar = ({ sideNavbar, handleMenu }) => {
-  const { user } = useContext(Context);
+  const { user, alertPopup } = useContext(Context);
 
   const handleBackgroundClick = (event) => {
     if (event.target.classList.contains("navbar--side-bg")) {
       handleMenu();
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("/api/user/logout",{},{headers: {"Authorization": `Bearer ${user.get.token}`}});
+      user.set(null);
+      alertPopup("Logged out!", "User logged out!", "green", 3000);
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className="navbar--side-bg" onClick={handleBackgroundClick}>
@@ -43,7 +54,10 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
               <span className="material-icons blue">post_add</span>
               Add Recipe
             </NavLink>
-            <NavLink to="/logout" onClick={handleMenu}>
+            <NavLink to="/" onClick={() => {
+              handleLogout();
+              handleMenu();
+            }}>
               <span className="material-icons red">logout</span>
               Logout
             </NavLink>
