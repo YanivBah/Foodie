@@ -35,6 +35,10 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
         {/* If user connected */}
         {user.get && (
           <>
+            <NavLink to={`/profile/${user.get.user.username}`} onClick={handleMenu}>
+              <span className="material-icons pink">account_circle</span>
+              Profile
+            </NavLink>
             <NavLink to="/add-recipe" onClick={handleMenu}>
               <span className="material-icons blue">post_add</span>
               Add Recipe

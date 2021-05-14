@@ -54,6 +54,9 @@
 .material-icons.yellow {
   @apply text-white bg-yellow-500;
 }
+.material-icons.pink {
+  @apply text-white bg-pink-600;
+}
 
 .slide-animation {
   animation: slide-from-left 0.4s linear both;

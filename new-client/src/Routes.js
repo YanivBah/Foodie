@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar/Navbar'
 import { AddRecipe } from './pages/AddRecipe/AddRecipe'
 import { AllRecipes } from './pages/AllRecipes/AllRecipes'
 import { Search } from './pages/Search/Search'
+import { Dashboard } from './pages/Dashboard/Dashboard'
 
 export const Routes = () => {
   return (
@@ -53,6 +54,11 @@ export const Routes = () => {
         {/* Search */}
         <Route path="/search" exact>
           <Search />
+        </Route>
+
+        {/* Dashboard */}
+        <Route path="/dashboard" exact>
+          <Dashboard />
         </Route>
 
 

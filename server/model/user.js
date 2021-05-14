@@ -121,6 +121,7 @@ userSchema.methods.toPublicJSON = function () {
   delete userObject.permissions;
   delete userObject.password;
   delete userObject.tokens;
+  delete userObject.avatar;
   return userObject;
 };
 

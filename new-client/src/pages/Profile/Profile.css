@@ -1,5 +1,10 @@
 .profile {
-  @apply pt-28 px-4 text-gray-700;
+  @apply pt-28 px-4 text-gray-700 relative;
+}
+.profile .dashboard-link {
+  @apply rounded px-3 border-b-4 border-l-2 shadow-lg bg-red-500 border-red-600 text-white;
+  @apply inline-flex transition-all focus:outline-none focus:ring ring-red-300;
+  @apply absolute top-0 right-6 mt-28;
 }
 
 .profile .head {

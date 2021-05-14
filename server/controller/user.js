@@ -3,6 +3,7 @@ const Recipe = require("../model/recipe");
 const sharp = require("sharp");
 const fs = require("fs").promises;
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const loginUser = async (req,res) => {
   try {
@@ -14,6 +15,34 @@ const loginUser = async (req,res) => {
     res.status(400).send(e.message);
   }
 };
+
+const updateUser = async (req,res) => {
+  try {
+    const body = JSON.parse(req.body.body);
+    const isMatch = await bcrypt.compare(body.oldPassword, req.user.password);
+    if (!isMatch) throw new Error('Unable to validate password');
+    if (body.username) {
+      req.user.username = body.username;
+    }
+    if (body.email) {
+      req.user.email = body.email;
+    }
+    if (body.newPassword) {
+      req.user.password = body.newPassword;
+    }
+    if (req.file) {
+      const buffer = await sharp(req.file.buffer)
+      .resize({ width: 600 })
+      .jpeg({ quality: 90 })
+      .toBuffer();
+      req.user.avatar = buffer;
+    }
+    await req.user.save()
+    res.send(req.user.toPublicJSON());
+  } catch (e) {
+    res.status(400).send(e);
+  }
+}
 
 const activeUser = async (req, res) => {
   try {
@@ -121,4 +150,5 @@ module.exports = {
   getUser,
   getUserRecipes,
   getUserAvatar,
+  updateUser,
 };

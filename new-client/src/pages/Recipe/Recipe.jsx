@@ -86,7 +86,7 @@ const momentConfig = {
           <div className="meta">
             <div className="user">
               <img
-                src={`/api/user/avatar?username=${recipe.owner.username}`}
+                src={`/api/user/avatar?username=${recipe.owner.username}&v=${Date.now()}`}
                 alt="Literally avatar"
               />
               <span>

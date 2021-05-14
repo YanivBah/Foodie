@@ -305,7 +305,7 @@ export const Search = () => {
               ))}
             </>
           )}
-          {maxRecipes && maxRecipes > recipes.length && (
+          {maxRecipes !== 0 && maxRecipes > recipes.length && (
             <Button text="Load More" onClick={() => handleSearch('more')} />
           )}
         </>
