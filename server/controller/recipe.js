@@ -27,6 +27,7 @@ const addRecipe = async (req, res) => {
       .toBuffer();
     const body = JSON.parse(req.body.body);
     body.ingredients.forEach(ing => ing.amount = parseInt(ing.amount));
+    body.tags.forEach(tag => tag = tag.toLowerCase());
     body.image = buffer;
     const recipe = new Recipe({
       ...body,

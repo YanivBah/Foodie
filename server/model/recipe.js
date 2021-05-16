@@ -15,7 +15,6 @@ const RecipeSchema = new mongoose.Schema(
     tags: {
       type: [String],
       default: [],
-      lowercase: true,
       validate(value) {
         if (value.length > 3) {
           throw new Error('You can 3 tags maximum');

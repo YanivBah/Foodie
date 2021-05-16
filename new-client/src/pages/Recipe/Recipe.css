@@ -2,7 +2,7 @@
   @apply flex justify-center pt-28 px-4 sm:pt-32 md:pt-36 lg:pt-40 lg:px-20 mx-auto;
 }
 .recipe main {
-  @apply rounded-t-lg overflow-hidden shadow-xl lg:shadow-2xl;
+  @apply rounded-t-lg overflow-hidden shadow-xl lg:shadow-2xl lg:w-3/4;
 }
 .recipe h1 {
   @apply mt-4 text-2xl px-3 text-gray-700 font-bold lg:px-7;

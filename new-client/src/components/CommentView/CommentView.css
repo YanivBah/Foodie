@@ -9,7 +9,7 @@
 }
 
 .comment .details .meta {
-  @apply font-semibold mb-1 flex items-center;
+  @apply font-semibold text-gray-800 mb-1 flex items-center px-3;
 }
 .comment .details .meta span {
   @apply font-light text-xs ml-2 text-gray-800;

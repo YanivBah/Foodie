@@ -66,14 +66,6 @@ const momentConfig = {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[recipe])
 
-  const getDate = () => {
-    if (recipe.updatedAt !== recipe.createdAt) {
-      const updatedAt = `Updated \n${moment(recipe.updatedAt).calendar(momentConfig)}`
-      return updatedAt;
-    }
-    const createdAt = `Uploaded \n${moment(recipe.createdAt).calendar(momentConfig)}`
-    return createdAt;
-  }
   return (
     <div className="recipe">
       {recipe && (
@@ -98,7 +90,7 @@ const momentConfig = {
                 </Link>
               </span>
             </div>
-            <p>{getDate()}</p>
+            <p>{`Uploaded \n${moment(recipe.createdAt).calendar(momentConfig)}`}</p>
           </div>
           <RateRecipe
             ratings={recipe.rating}

@@ -2,8 +2,12 @@
   @apply my-5;
 }
 .step-view .number {
-  @apply bg-gray-700 rounded-full text-white inline-block pl-2 pr-2 mr-2 font-semibold shadow-md;
+  @apply bg-gray-700 rounded-full text-white inline-block pl-2 pr-2 mr-2 font-semibold shadow-md mb-3;
 }
 .step-view p {
-  @apply text-base leading-5 tracking-tight px-4 text-gray-700;
+  @apply text-base leading-5 tracking-tight text-gray-700 whitespace-pre-line;
+}
+.step-view br {
+  content: " ";
+  @apply block my-3;
 }

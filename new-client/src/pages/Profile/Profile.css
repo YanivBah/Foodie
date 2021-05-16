@@ -17,7 +17,7 @@
   @apply text-base;
 }
 .profile .head img {
-  @apply w-28 mr-3 sm:w-32 md:w-36 lg:w-44 rounded-full;
+  @apply w-28 h-28 mr-3 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full object-cover;
 }
 .profile .score {
   @apply text-center block bg-gray-200 mt-2 py-2 rounded-md font-semibold text-lg max-w-xl mx-auto;
