@@ -15,12 +15,17 @@ export const AllRecipes = () => {
     setRecipesLength(data.recipesLength);
   };
   
-  useEffect(() => {fetchRecentRecipes()}, []);
+  useEffect(() => {
+    document.title = "Foodie - All Recipes";
+    fetchRecentRecipes()
+  }, []);
 
   return (
     <div className="all-recipes">
       <h2>All Recipes</h2>
-      {recipes.map(recipe => <RecipeBox recipe={recipe} key={recipe._id}/>)}
+      <div className="grid-preview">
+        {recipes.map(recipe => <RecipeBox recipe={recipe} key={recipe._id}/>)}
+      </div>
       {recipesLength && recipesLength > recipes.length && <Button text="Load More" onClick={fetchRecentRecipes}/>}
     </div>
   )

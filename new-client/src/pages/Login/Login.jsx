@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Input } from "../../components/Input/Input";
 import { Button } from "../../components/Button/Button";
@@ -11,7 +11,11 @@ export const Login = () => {
     username: '',
     password: ''
   });
-  const history = useHistory()
+  const history = useHistory();
+
+  useEffect(() => {
+    document.title = "Foodie - Login";
+  },[]);
 
   const handleLogin = async(event) => {
     event.preventDefault();

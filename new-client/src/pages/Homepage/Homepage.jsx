@@ -14,7 +14,10 @@ export const Homepage = () => {
     setRecent(data.recipes);
   }
 
-  useEffect(() => {fetchRecentRecipes()}, []);
+  useEffect(() => {
+    document.title = `Foodie`;
+    fetchRecentRecipes()
+  }, []);
 
   return (
     <div className="homepage">

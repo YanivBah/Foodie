@@ -20,10 +20,7 @@ export const RecipePreview = ({ values }) => {
 
         <div className="meta">
           <div className="user">
-            <img
-              src="https://yt3.ggpht.com/ytc/AAUvwngw35YY8vYI86RTOoEGafSxEjghjzTcKw3LbMyZ=s900-c-k-c0x00ffffff-no-rj"
-              alt="Literally avatar"
-            />
+            <img src={`/api/user/avatar?username=${user.get.user.username}`} alt="Literally avatar" />
             <span>
               By <Link to=" #">{user.get.user.username}</Link>
             </span>

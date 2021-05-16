@@ -37,6 +37,8 @@ export const Search = () => {
     })
   };
 
+  useEffect(() => document.title = `Foodie - Search Recipes`,[]);
+
   useEffect(() => {
     const searchIngredient = async () => {
       const { data } = await axios.get(
@@ -145,7 +147,7 @@ export const Search = () => {
   return (
     <div className="search">
       {!viewAdvanced && (
-        <>
+        <div className="search-inputs">
           <div className="header">
             <h1>Search for recipes</h1>
             <p>
@@ -221,11 +223,11 @@ export const Search = () => {
               ))}
             </div>
           )}
-        </>
+        </div>
       )}
 
       {viewAdvanced && (
-        <>
+        <div className="search-inputs">
           <div className="header">
             <h1>Advanced search for recipes</h1>
             <p>
@@ -291,7 +293,7 @@ export const Search = () => {
               ))}
             </div>
           }
-        </>
+        </div>
       )}
       <Button text="Search" onClick={() => handleSearch("new")} />
       {viewResults && (

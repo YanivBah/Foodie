@@ -4,7 +4,7 @@
 .profile .dashboard-link {
   @apply rounded px-3 border-b-4 border-l-2 shadow-lg bg-red-500 border-red-600 text-white;
   @apply inline-flex transition-all focus:outline-none focus:ring ring-red-300;
-  @apply absolute top-0 right-6 mt-28;
+  @apply absolute top-0 right-6 mt-28 md:top-5 md:right-8 lg:top-10 lg:right-14;
 }
 
 .profile .head {
@@ -17,15 +17,16 @@
   @apply text-base;
 }
 .profile .head img {
-  @apply w-28 mr-3 rounded-full;
+  @apply w-28 mr-3 sm:w-32 md:w-36 lg:w-44 rounded-full;
 }
 .profile .score {
-  @apply text-center block bg-gray-200 mt-2 py-2 rounded-md font-semibold text-lg;
+  @apply text-center block bg-gray-200 mt-2 py-2 rounded-md font-semibold text-lg max-w-xl mx-auto;
+  @apply md:my-4 lg:my-6;
 }
 .profile .score span {
   @apply font-extralight;
 }
 
 .profile h2 {
-  @apply text-xl font-bold mt-3;
+  @apply text-xl font-bold my-3 md:text-2xl lg:text-3xl lg:font-semibold;
 }

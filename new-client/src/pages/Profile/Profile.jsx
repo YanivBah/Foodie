@@ -24,8 +24,10 @@ export const Profile = () => {
   }
 
   useEffect(() => {
+    document.title = `Foodie - Loading...`;
     const fetchProfile = async() => {
       const {data} = await axios.get(`/api/user/info?username=${username}`);
+      document.title = `Foodie - ${data.username}'s Profile`;
       setProfile(data);
     }
     fetchProfile();

@@ -1,8 +1,8 @@
 .add-recipe {
-  @apply pt-28 px-4;
+  @apply pt-28 px-4 md:pt-36 lg:pt-44 sm:px-8 md:px-10 max-w-7xl mx-auto;
 }
 .add-recipe h1 {
-  @apply text-2xl;
+  @apply text-2xl md:text-3xl lg:text-4xl;
 }
 .add-recipe h1 + p {
   @apply text-sm mb-3;

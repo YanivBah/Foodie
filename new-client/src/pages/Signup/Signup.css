@@ -1,12 +1,12 @@
 .signup {
-  @apply pt-28 px-4 md:pt-36 lg:pt-44 sm:px-8 md:px-20;
+  @apply pt-28 px-4 md:pt-36 lg:pt-44 sm:px-8 md:px-20 max-w-4xl mx-auto;
 }
 .signup .header {
   @apply text-center mb-5;
 }
 
 .signup .header h1 {
-  @apply text-xl font-semibold;
+  @apply text-xl font-semibold lg:text-3xl;
 }
 .signup .header p {
   @apply font-light;

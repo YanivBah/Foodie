@@ -32,6 +32,8 @@ export const AddRecipe = () => {
       preview: null,
     },
   });
+
+  useEffect(() => (document.title = `Foodie - Add New Recipe`), []);
   // Here is the Error Handing
   const changePage = (type) => {
     if (type === "increase") {

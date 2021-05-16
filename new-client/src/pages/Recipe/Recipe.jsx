@@ -44,7 +44,9 @@ const momentConfig = {
 
   useEffect(() => {
     const fetchRecipe = async() => {
+      document.title = "Foodie - Loading...";
       const { data } = await axios.get(`/api/recipe/get?id=${recipeID}`);
+      document.title = `Foodie - ${data.recipe.title}`;
       data.recipe.ingredients.sort((ing1, ing2) => {
         if (ing1.ingredient.name.length < ing2.ingredient.name.length) return -1;
         if (ing1.ingredient.name.length > ing2.ingredient.name.length) return 1;
@@ -66,10 +68,10 @@ const momentConfig = {
 
   const getDate = () => {
     if (recipe.updatedAt !== recipe.createdAt) {
-      const updatedAt = `Updated at \n${moment().calendar(recipe.updatedAt, momentConfig)}`
+      const updatedAt = `Updated \n${moment(recipe.updatedAt).calendar(momentConfig)}`
       return updatedAt;
     }
-    const createdAt = `Uploaded at \n${moment().calendar(recipe.createdAt, momentConfig)}`
+    const createdAt = `Uploaded \n${moment(recipe.createdAt).calendar(momentConfig)}`
     return createdAt;
   }
   return (

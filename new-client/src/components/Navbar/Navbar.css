@@ -11,8 +11,12 @@
   user-select: none;
 }
 
+.navbar--left {
+  @apply cursor-pointer;
+}
+
 .navbar--center img {
-  @apply w-28 sm:w-32 md:w-36;
+  @apply w-28 sm:w-32 md:w-36 cursor-pointer;
 }
 
 .navbar .material-icons {
@@ -33,29 +37,46 @@
 }
 
 .navbar--side a {
-  @apply px-2 py-3 border-gray-500 border-b flex items-center;
+  @apply px-2 py-3 border-gray-500 border-opacity-30 border-b flex items-center transition-all;
+}
+.navbar--side span.material-icons {
+  @apply cursor-pointer;
 }
 .navbar--side a .material-icons {
   @apply text-3xl mr-3 rounded-full;
   padding: 1.5px 3px;
 }
-.material-icons.red {
+.material-icons.red,
+.navbar--side a.active.red {
   @apply text-white bg-red-500;
 }
-.material-icons.green {
+.material-icons.green,
+.navbar--side a.active.green {
   @apply text-white bg-green-500;
 }
-.material-icons.blue {
+.material-icons.blue,
+.navbar--side a.active.blue {
   @apply text-white bg-blue-500;
 }
-.material-icons.purple {
+.material-icons.purple,
+.navbar--side a.active.purple {
   @apply text-white bg-purple-500;
 }
-.material-icons.yellow {
+.material-icons.yellow,
+.navbar--side a.active.yellow {
   @apply text-white bg-yellow-500;
 }
-.material-icons.pink {
+.material-icons.pink,
+.navbar--side a.active.pink {
   @apply text-white bg-pink-600;
+}
+
+.navbar--side a.active {
+  @apply font-semibold  hover:bg-opacity-80;
+  text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
+}
+.navbar--side a:hover {
+  @apply pl-4 bg-gray-200;
 }
 
 .slide-animation {

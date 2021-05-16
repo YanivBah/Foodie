@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
@@ -23,6 +23,10 @@ export const Signup = () => {
       preview: null
     }
   });
+    
+  useEffect(() => {
+    document.title = "Foodie - Signup now!";
+  }, []);
 
   const handleSignup = async (event) => {
     event.preventDefault();

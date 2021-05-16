@@ -42,7 +42,7 @@ export const Navbar = () => {
       </div>
 
       <div className="navbar--right">
-        <Link to="Search">
+        <Link to="/search">
           <span className="material-icons">search</span>
         </Link>
       </div>
