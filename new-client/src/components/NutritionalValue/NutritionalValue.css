@@ -1,0 +1,30 @@
+.nutritional-value {
+  @apply fixed top-0 left-0 w-full h-full;
+  animation: background-to-black 0.4s linear both;
+}
+
+.nutritional-value .container {
+  @apply fixed top-1/2 left-1/2 bg-white p-5 rounded-xl max-w-sm md:max-w-lg text-gray-700;
+  transform: translate(-50%, -50%);
+}
+.nutritional-value .material-icons {
+  @apply p-1 bg-red-600 text-white rounded-full absolute right-0 top-0 m-4 cursor-pointer;
+}
+.nutritional-value h4 {
+  @apply text-xl font-bold;
+}
+.nutritional-value h4 + p {
+  @apply text-sm mb-3;
+}
+.nutritional-value .red {
+  @apply text-red-500 font-semibold;
+}
+.nutritional-value .grid {
+  @apply grid-cols-2 border border-gray-800 border-opacity-25;
+}
+.nutritional-value .grid span {
+  @apply block p-2 border border-gray-800 border-opacity-25 bg-gray-200;
+}
+.nutritional-value .grid span:nth-child(odd) {
+  @apply font-medium;
+}

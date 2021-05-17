@@ -45,7 +45,7 @@
   @apply lg:px-7;
 }
 .recipe .ingredients {
-  @apply px-3 lg:px-7;
+  @apply px-3 lg:px-7 my-4;
 }
 .recipe .ingredients h3,
 .recipe .instructions h3,

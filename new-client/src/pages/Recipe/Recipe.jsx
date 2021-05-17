@@ -7,6 +7,7 @@ import { Button } from '../../components/Button/Button';
 import { CommentView } from '../../components/CommentView/CommentView';
 import { IngredientView } from '../../components/IngredientView/IngredientView';
 import { NewComment } from '../../components/NewComment/NewComment';
+import { NutritionalValue } from '../../components/NutritionalValue/NutritionalValue';
 import { RateRecipe } from '../../components/RateRecipe/RateRecipe';
 import { StepView } from '../../components/StepView/StepView';
 import Context from "../../Context";
@@ -27,6 +28,7 @@ const momentConfig = {
   const [recipe, setRecipe] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentsLength, setCommentsLength] = useState([]);
+  const [nutritionalValue, setNutritionalValue] = useState(null);
 
   const fetchComments = async (what = '') => {
     if (what === 'reload') {
@@ -80,7 +82,9 @@ const momentConfig = {
           <div className="meta">
             <div className="user">
               <img
-                src={`/api/user/avatar?username=${recipe.owner.username}&v=${Date.now()}`}
+                src={`/api/user/avatar?username=${
+                  recipe.owner.username
+                }&v=${Date.now()}`}
                 alt="Literally avatar"
               />
               <span>
@@ -90,7 +94,9 @@ const momentConfig = {
                 </Link>
               </span>
             </div>
-            <p>{`Uploaded \n${moment(recipe.createdAt).calendar(momentConfig)}`}</p>
+            <p>{`Uploaded \n${moment(recipe.createdAt).calendar(
+              momentConfig
+            )}`}</p>
           </div>
           <RateRecipe
             ratings={recipe.rating}
@@ -100,11 +106,24 @@ const momentConfig = {
           />
           <div className="ingredients">
             <h3>Ingredients</h3>
-            <p>Click on the number to check the ingredient.</p>
+            <p>Click on the number to check the ingredient.<br/>
+            Click on the ingredient name to see the nutritional values.
+            </p>
             {recipe.ingredients.map((ing, index) => (
-              <IngredientView key={index} ingredient={ing} index={index} />
+              <IngredientView
+                key={index}
+                ingredient={ing}
+                index={index}
+                setNutritionalValue={setNutritionalValue}
+              />
             ))}
           </div>
+          {nutritionalValue && (
+            <NutritionalValue
+              ingredient={nutritionalValue}
+              setNutritionalValue={setNutritionalValue}
+            />
+          )}
           <div className="instructions">
             <h3>Instructions</h3>
             <p>Follow the steps carefully or you'll be sorry.</p>

@@ -6,7 +6,7 @@
   @apply cursor-pointer;
 }
 .ingredient-view .name {
-  @apply font-medium text-gray-600;
+  @apply font-medium text-gray-600 cursor-pointer hover:text-gray-900 hover:underline;
 }
 .ingredient-view .unit {
   @apply font-light text-sm;
