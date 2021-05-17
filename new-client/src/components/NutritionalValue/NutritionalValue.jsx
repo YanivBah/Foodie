@@ -18,15 +18,22 @@ export const NutritionalValue = ({ingredient, setNutritionalValue}) => {
 
   const close = () => setNutritionalValue(null);
 
+  const handleBackgroundClick = (event) => {
+    if (event.target.classList.contains("nutritional-value")) {
+      close();
+    }
+  };
   return (
-    <div className="nutritional-value">
+    <div className="nutritional-value" onClick={handleBackgroundClick}>
       <div className="container">
         <span className="material-icons" onClick={close}>
           close
         </span>
         <h4>{ingredient.ingredient.name}</h4>
         <p>Nutritional values are per 100 gram</p>
-        {!ingredient.ingredient.nutrients && <p className="red">No values founded.</p>}
+        {!ingredient.ingredient.nutrients && (
+          <p className="red">No values founded.</p>
+        )}
         {ingredient.ingredient.nutrients && (
           <div className="grid">{values()}</div>
         )}
