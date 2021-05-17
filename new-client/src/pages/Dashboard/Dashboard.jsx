@@ -16,14 +16,14 @@ export const Dashboard = () => {
   useEffect(() => {
     if (user.get) {
       setValues({
-        username: user.get.user.username,
-        email: user.get.user.email,
+        username: user.get.username,
+        email: user.get.email,
         oldPassword: "",
         newPassword: "",
         newRepeatPassword: "",
         file: {
           raw: null,
-          preview: `/api/user/avatar?username=${user.get.user.username}&v=${Date.now()}`,
+          preview: `/api/user/avatar?username=${user.get.username}&v=${Date.now()}`,
         },
       });
     }
@@ -32,7 +32,7 @@ export const Dashboard = () => {
 
   const handleUpdate = async(e) => {
     e.preventDefault();
-    if (values.username === user.get.user.username && values.email === user.get.user.email && values.newPassword === '' && values.newRepeatPassword === '' && !values.file.raw) {
+    if (values.username === user.get.username && values.email === user.get.email && values.newPassword === '' && values.newRepeatPassword === '' && !values.file.raw) {
       return alertPopup("Nothing changed", "You changed nothing.", "red", 3500);
     }
     if (values.oldPassword === '') {
@@ -52,17 +52,17 @@ export const Dashboard = () => {
         5000
       );
     }
-    if (values.username !== user.get.user.username && /\W/g.test(values.username)) {
+    if (values.username !== user.get.username && /\W/g.test(values.username)) {
       return alertPopup("Username", "The username can't include spaces or symbols.", "red", 3000);
     }
-    if (values.email !== user.get.user.email && !validator.isEmail(values.email)) {
+    if (values.email !== user.get.email && !validator.isEmail(values.email)) {
       return alertPopup("Email", "The email is invalid.", "red", 3000);
     }
     const body = {};
-    if (values.username !== user.get.user.username) {
+    if (values.username !== user.get.username) {
       body.username = values.username;
     }
-    if (values.email !== user.get.user.email) {
+    if (values.email !== user.get.email) {
       body.email = values.email;
     }
     if (values.newPassword !== '') {
@@ -76,10 +76,7 @@ export const Dashboard = () => {
     formData.append("body", JSON.stringify(body));
     try {
       const { data } = await axios.patch("/api/user/update", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${user.get.token}`,
-        },
+        headers: {"Content-Type": "multipart/form-data",}
       });
       user.set(prev => {
         const newUserData = {...prev};

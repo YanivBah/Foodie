@@ -43,7 +43,7 @@ export const Profile = () => {
     <>
       {profile && (
         <div className="profile">
-          {user.get && user.get.user._id === profile._id && (
+          {user.get && user.get._id === profile._id && (
             <Link to="/dashboard">
               <div className="dashboard-link">
                 <span className="material-icons">manage_accounts</span>

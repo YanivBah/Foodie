@@ -38,9 +38,7 @@ export const CommentView = ({ comment, setComments, setCommentsLength }) => {
     const body = {id: comment._id, content: value.textarea};
     console.log(body);
     try {
-      await axios.patch("/api/comment/edit", body, {
-        headers: { Authorization: `Bearer ${user.get.token}` }
-      });
+      await axios.patch("/api/comment/edit", body);
       setComments(prev => {
         const comments = [...prev];
         const currentComment = comments.find(com => com._id === comment._id);
@@ -58,10 +56,7 @@ export const CommentView = ({ comment, setComments, setCommentsLength }) => {
       id: comment._id,
     };
     try {
-      await axios.delete("/api/comment/delete", {
-        headers: { Authorization: `Bearer ${user.get.token}` },
-        data: body
-      });
+      await axios.delete("/api/comment/delete", {data: body});
       setComments(prev => {
         return prev.filter(com => com !== comment)
       });
@@ -84,7 +79,7 @@ export const CommentView = ({ comment, setComments, setCommentsLength }) => {
             <Link to={`/profile/${comment.user.username}`}>
               {comment.user.username}
             </Link>
-            <span>{moment().calendar(getDate(), momentConfig)}</span>
+            <span>{moment(getDate()).calendar(momentConfig)}</span>
           </p>
           {comment.user._id === user.get?.user?._id && (
             <div className="controls">

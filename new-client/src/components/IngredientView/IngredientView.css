@@ -3,6 +3,7 @@
 }
 .ingredient-view .number {
   @apply bg-gray-200 w-6 h-6 rounded-full inline-flex justify-center font-medium text-gray-700 shadow-sm mr-2;
+  @apply cursor-pointer;
 }
 .ingredient-view .name {
   @apply font-medium text-gray-600;

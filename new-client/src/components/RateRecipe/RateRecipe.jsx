@@ -19,8 +19,8 @@ export const RateRecipe = ({ ratings, recipeID, setRecipe, owner }) => {
     return sum / ratings.length;
   };
 
-  if (user.get && user.get.user._id !== owner) {
-    isRated = ratings.find((rating) => rating.user === user.get.user._id);
+  if (user.get && user.get._id !== owner) {
+    isRated = ratings.find((rating) => rating.user === user.get._id);
     if (isRated) initialRating = isRated.rating;
   } else {
     initialRating = averageRating();
@@ -44,7 +44,7 @@ export const RateRecipe = ({ ratings, recipeID, setRecipe, owner }) => {
         2500
       );
     }
-    if (user.get.user._id === owner) {
+    if (user.get._id === owner) {
       return alertPopup(
         "Unable to rate",
         "You can't rate your own recipe.",
@@ -54,13 +54,11 @@ export const RateRecipe = ({ ratings, recipeID, setRecipe, owner }) => {
     }
     const body = { id: recipeID, rating: number };
     try {
-      await axios.post("/api/recipe/rating", body, {
-        headers: { Authorization: `Bearer ${user.get.token}` },
-      });
+      await axios.post("/api/recipe/rating", body);
       setRating(number);
       setRecipe((prev) => {
         const newValue = { ...prev };
-        newValue.rating.unshift({ user: user.get.user._id, rating: number });
+        newValue.rating.unshift({ user: user.get._id, rating: number });
         return newValue;
       });
     } catch (e) {
@@ -68,7 +66,7 @@ export const RateRecipe = ({ ratings, recipeID, setRecipe, owner }) => {
   };
 
   const paragraph = () => {
-    if (user.get && user.get.user._id === owner) {
+    if (user.get && user.get._id === owner) {
       return "Just wait, time make it better.";
     } else if (!user.get) {
       return "Login or signup to rate.";

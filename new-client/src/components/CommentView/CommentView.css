@@ -2,7 +2,7 @@
   @apply flex mb-2;
 }
 .comment img {
-  @apply w-12 h-12 mr-3 rounded-full;
+  @apply w-12 h-12 mr-3 rounded-full object-cover;
 }
 .comment .details {
   @apply border rounded-md w-full;
@@ -18,7 +18,7 @@
   @apply px-3 text-gray-600;
 }
 .comment .details .controls .material-icons {
-  @apply text-xl rounded-full text-white px-1;
+  @apply text-xl rounded-full text-white px-1 cursor-pointer;
 }
 .comment .details .controls .material-icons.blue {
   @apply bg-blue-500;

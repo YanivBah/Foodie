@@ -20,9 +20,9 @@ export const RecipePreview = ({ values }) => {
 
         <div className="meta">
           <div className="user">
-            <img src={`/api/user/avatar?username=${user.get.user.username}`} alt="Literally avatar" />
+            <img src={`/api/user/avatar?username=${user.get.username}`} alt="Literally avatar" />
             <span>
-              By <Link to=" #">{user.get.user.username}</Link>
+              By <Link to=" #">{user.get.username}</Link>
             </span>
           </div>
           <p>Uploaded at Today</p>

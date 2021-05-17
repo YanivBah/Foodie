@@ -128,9 +128,7 @@ export const Search = () => {
     }
 
     try {
-      const { data } = await axios.get(`/api/recipe/searchIngredient`,
-      { params }
-      );
+      const { data } = await axios.get(`/api/recipe/searchIngredient`,{ params });
       if (type === 'new') {
         setMaxRecipes(data.recipesLength);
         setRecipes(data.recipes);

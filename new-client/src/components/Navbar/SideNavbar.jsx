@@ -13,7 +13,7 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("/api/user/logout",{},{headers: {"Authorization": `Bearer ${user.get.token}`}});
+      await axios.post("/api/user/logout");
       user.set(null);
       alertPopup("Logged out!", "User logged out!", "green", 3000);
     } catch (error) {
@@ -58,7 +58,7 @@ export const SideNavbar = ({ sideNavbar, handleMenu }) => {
           <>
             <NavLink
               exact
-              to={`/profile/${user.get.user.username}`}
+              to={`/profile/${user.get.username}`}
               activeClassName="active pink"
               onClick={handleMenu}
             >

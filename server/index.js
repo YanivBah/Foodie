@@ -6,6 +6,7 @@ const recipeRouter = require("./router/recipe");
 const commentRouter = require("./router/comment");
 const ingredientRouter = require("./router/ingredient");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 // mongoose.connect("mongodb://localhost:27017/recipes", {
@@ -23,6 +24,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(userRouter);
 app.use(recipeRouter);
 app.use(commentRouter);

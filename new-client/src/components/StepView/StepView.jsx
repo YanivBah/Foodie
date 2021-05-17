@@ -10,10 +10,10 @@ export const StepView = ({instruction, index}) => {
         return null;
       }
       return (
-        <>
+        <React.Fragment key={index}>
           <p>{paragraph}</p>
           {index !== splitted.length && <br/>}
-        </>
+        </React.Fragment>
       );
     })
   };

@@ -146,10 +146,7 @@ export const AddRecipe = () => {
     formData.append("body", JSON.stringify(body));
     try {
       const { data } = await axios.post("/api/recipe/add", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${user.get.token}`,
-        },
+        headers: {"Content-Type": "multipart/form-data"}
       });
       history.push(`/recipe/${data._id}`);
     } catch (error) {

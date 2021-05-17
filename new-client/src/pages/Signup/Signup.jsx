@@ -61,8 +61,7 @@ export const Signup = () => {
     }
     formData.append("body", JSON.stringify(body));
     try {
-      await axios.post("/api/user/signup", formData, {headers: {"Content-Type": "multipart/form-data"},});
-      // await axios.post('/api/user/signup', body);
+      await axios.post("/api/user/signup", formData, {headers: {"Content-Type": "multipart/form-data"}});
       alertPopup("Success!", "Signup was successful!", "green", 2000);
       history.push('/login');
     } catch (error) {

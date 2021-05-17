@@ -12,9 +12,7 @@ export const NewComment = ({ recipeID, setComments, setCommentsLength }) => {
   const addComment = async () => {
     const body = { id: recipeID ,content: value.textarea };
     try {
-      const { data } = await axios.post("/api/comment/add", body, {
-        headers: { Authorization: `Bearer ${user.get.token}` },
-      });
+      const { data } = await axios.post("/api/comment/add", body);
       setComments((prev) => {
         const newComment = [...prev];
         newComment.unshift(data);
