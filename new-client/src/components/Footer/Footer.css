@@ -1,0 +1,18 @@
+.footer {
+  @apply bg-gray-200 mt-16 shadow-inner flex justify-center items-center flex-col text-center;
+}
+.footer .fab,
+.footer .fas {
+  @apply text-4xl mx-2 my-4 px-3 py-2 rounded-full bg-gray-500 text-gray-50;
+  @apply hover:text-gray-600 hover:bg-gray-400 transition-all;
+}
+
+.footer .info {
+  @apply my-4;
+}
+.footer .info .name {
+  @apply font-medium text-xl text-gray-700;
+}
+.footer .info .name + p {
+  @apply text-gray-700 text-sm mt-2;
+}

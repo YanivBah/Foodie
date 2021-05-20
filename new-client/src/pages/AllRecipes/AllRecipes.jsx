@@ -10,7 +10,7 @@ export const AllRecipes = () => {
   const [recipesLength, setRecipesLength] = useState([]);
 
   const fetchRecentRecipes = async () => {
-    const { data } = await axios.get(`/api/recipe/recent?limit=5&skip=${recipes.length}`);
+    const { data } = await axios.get(`/api/recipe/recent?limit=6&skip=${recipes.length}`);
     setRecipes((prev) => prev.concat(data.recipes));
     setRecipesLength(data.recipesLength);
   };

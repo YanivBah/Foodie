@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
 import { CommentView } from '../../components/CommentView/CommentView';
 import { IngredientView } from '../../components/IngredientView/IngredientView';
+import { Loader } from '../../components/Loader/Loader';
 import { NewComment } from '../../components/NewComment/NewComment';
 import { NutritionalValue } from '../../components/NutritionalValue/NutritionalValue';
 import { RateRecipe } from '../../components/RateRecipe/RateRecipe';
@@ -70,6 +71,11 @@ const momentConfig = {
 
   return (
     <div className="recipe">
+      {!recipe && (
+        <main>
+          <Loader />
+        </main>
+      )}
       {recipe && (
         <main>
           <img
@@ -106,8 +112,10 @@ const momentConfig = {
           />
           <div className="ingredients">
             <h3>Ingredients</h3>
-            <p>Click on the number to check the ingredient.<br/>
-            Click on the ingredient name to see the nutritional values.
+            <p>
+              Click on the number to check the ingredient.
+              <br />
+              Click on the ingredient name to see the nutritional values.
             </p>
             {recipe.ingredients.map((ing, index) => (
               <IngredientView

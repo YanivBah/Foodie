@@ -9,7 +9,7 @@ export const ImageUploadPlusPreview = ({name, values, onChange, whatToChange, te
       onChange(newValue);
     }
   }
-
+  
   return (
     <>
       {values[whatToChange].preview && (

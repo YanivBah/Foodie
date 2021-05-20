@@ -33,8 +33,6 @@ const loginUser = async (req,res) => {
 
 const userInfoWithToken = (req, res) => {
   try {
-    console.log(req.user);
-    console.log(req.token);
     res.status(200).send(req.user.toPublicJSON());
   } catch (e) {
     res.status(401).send('Please Login');

@@ -10,6 +10,7 @@ import { AddRecipe } from './pages/AddRecipe/AddRecipe'
 import { AllRecipes } from './pages/AllRecipes/AllRecipes'
 import { Search } from './pages/Search/Search'
 import { Dashboard } from './pages/Dashboard/Dashboard'
+import { Footer } from './components/Footer/Footer'
 
 export const Routes = () => {
   return (
@@ -63,6 +64,7 @@ export const Routes = () => {
 
 
       </Switch>
+      <Footer/>
     </Router>
   );
 }

@@ -1,0 +1,170 @@
+.app-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  padding: 3rem 1rem;
+}
+.app-loader h1.heading-primary {
+  @apply font-light mb-2;
+}
+.app-loader.light {
+  color: #1e1e26;
+}
+.app-loader.light .app-loader__wisk-handle {
+  background: #fff;
+}
+.app-loader.light .app-loader__bowl {
+  background: #fff;
+}
+.app-loader__text {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  margin: 0 0 4rem;
+  width: 100%;
+}
+.app-loader__text {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 20rem) {
+  .app-loader__text {
+    font-size: calc(1.25rem + 1.25 * ((100vw - 20rem) / 62));
+  }
+}
+@media screen and (min-width: 82rem) {
+  .app-loader__text {
+    font-size: 2.5rem;
+  }
+}
+.app-loader__text span {
+  flex: 0 0 auto;
+  position: relative;
+  -webkit-animation: flip 10s ease-in infinite;
+  animation: flip 10s ease-in infinite;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+}
+
+.app-loader__wisk {
+  display: flex;
+  z-index: 1;
+  margin: 0;
+  transform-origin: bottom;
+  -webkit-animation: depth 2s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+  animation: depth 2s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+  transform: translateZ(-1px) scale(0.9, 0.9);
+}
+.app-loader__wisk-inner {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  -webkit-animation: length 2s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+  animation: length 2s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+  transform: translateX(-45%) rotateZ(-10deg) rotateX(-5deg);
+}
+.app-loader__wisk-handle {
+  width: 1.75rem;
+  height: 2.75rem;
+  border: 0.25rem solid;
+  border-radius: 0.25rem;
+  background: #1e1e26;
+  z-index: 2;
+}
+.app-loader__wisk-wires {
+  position: relative;
+  height: 5rem;
+  width: 5rem;
+  border: 0.25rem solid;
+  border-radius: 0% 100% 45% 55%/0% 55% 45% 100%;
+  transform: rotate(45deg);
+  transform-origin: 50%;
+  z-index: 1;
+  margin-bottom: -2rem;
+}
+.app-loader__wisk-wires::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 0% 100% 20% 80%/0% 80% 20% 100%;
+  transform: translateX(-50%) scale(0.75);
+  margin-top: -0.5rem;
+  margin-left: -0.5rem;
+  border: 0.25rem solid;
+}
+.app-loader__bowl {
+  height: 4.5rem;
+  width: 9rem;
+  border: 0.25rem solid;
+  border-radius: 0.25rem 0.25rem 3rem 3rem;
+  background: #1e1e26;
+  z-index: 2;
+  transform: translateZ(5px);
+}
+
+@-webkit-keyframes flip {
+  0% {
+    transform: translateX(0) rotateY(0deg);
+  }
+  5% {
+    transform: translateX(-100%) rotateY(220deg);
+  }
+  10% {
+    transform: translateX(0) rotateY(360deg);
+  }
+  100% {
+    transform: translateX(0) rotateY(360deg);
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: translateX(0) rotateY(0deg);
+  }
+  5% {
+    transform: translateX(-100%) rotateY(220deg);
+  }
+  10% {
+    transform: translateX(0) rotateY(360deg);
+  }
+  100% {
+    transform: translateX(0) rotateY(360deg);
+  }
+}
+@-webkit-keyframes depth {
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    transform: translateX(25%) rotateZ(6deg) rotateX(10deg);
+  }
+}
+@keyframes depth {
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    transform: translateX(25%) rotateZ(6deg) rotateX(10deg);
+  }
+}
+@-webkit-keyframes length {
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    transform: translateZ(2px) scale(1.025, 1.025);
+  }
+}
+@keyframes length {
+  50% {
+    -webkit-animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    transform: translateZ(2px) scale(1.025, 1.025);
+  }
+}

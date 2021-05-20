@@ -10,7 +10,7 @@ export const Homepage = () => {
   const [recent, setRecent] = useState([]);
   const history = useHistory();
   const fetchRecentRecipes = async() => {
-    const {data} = await axios.get("/api/recipe/recent?limit=6&skip=0");
+    const {data} = await axios.get("/api/recipe/recent?limit=3&skip=0");
     setRecent(data.recipes);
   }
 

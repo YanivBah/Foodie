@@ -1,12 +1,12 @@
 .recipe-preview {
-  @apply overflow-hidden mb-2 rounded-lg  border border-gray-200;
+  @apply overflow-hidden rounded-lg  border border-gray-200;
 }
 
 .recipe-preview--image {
   @apply relative;
 }
 .recipe-preview--image img {
-  @apply object-cover w-full h-52;
+  @apply w-full h-52 object-cover;
 }
 .recipe-preview--image .title {
   @apply absolute bottom-0 px-2 w-full text-gray-800 bg-white bg-opacity-30;
